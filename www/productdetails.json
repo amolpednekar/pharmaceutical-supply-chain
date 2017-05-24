@@ -1,0 +1,25 @@
+[{
+    "pid": "4020",
+    "name": "Celexa",
+    "producttypename": "HUMAN PRESCRIPTION DRUG",
+    "proprietaryname": "Celexa",
+    "nonproprietaryname": "Citalopram Hydrobromide",
+    "dosageformname": "TABLET, FILM COATED",
+    "routename": "ORAL",
+    "strengthnumber": "40",
+    "strengthunit": "mg/1",
+    "productcode": "4020"
+
+  },
+  {
+    "pid": "2011",
+    "name": "Vicodin",
+    "producttypename": "HUMAN PRESCRIPTION DRUG",
+    "proprietaryname": "Vicodin",
+    "nonproprietaryname": "Hydrocodone Bitartrate and Acetaminophen",
+    "dosageformname": "TABLET",
+    "routename": "ORAL",
+    "strengthnumber": "5; 300",
+    "strengthunit": "mg/1; mg/1",
+    "productcode": "3041"
+}]

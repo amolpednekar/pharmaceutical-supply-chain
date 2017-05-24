@@ -5,42 +5,67 @@
       <form name="manufacturerForm" class="form item" ng-submit="ManufacturerForm(data)">
         <span class="input-label">Manufacturer Name</span>
         <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter LOT#" ng-model="data.name" required>
+          <input type="text" name="name" placeholder="Enter Manufacturer Name" ng-model="manufacturer.name" disabled>
         </div>
         <span class="input-label">Lot Number</span>
         <div class="item item-input">
-          <input type="text" name="lot" placeholder="Enter LOT#" ng-model="data.lot" required>
+          <input type="text" name="lot" placeholder="Enter LOT# (Not Required)" ng-model="lot" disabled>
         </div>
         <span class="input-label">NDC</span>
         <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter NDC#" ng-model="data.name" required>
+          <input type="text" name="name" placeholder="Enter NDC# (Not Required)" ng-model="ndc" disabled>
         </div>
         <span class="input-label">Item UID</span>
         <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter Unique Identifier of sales item" ng-model="data.name" required>
+          <input type="text" name="name" placeholder="Enter Unique Identifier of sales item" ng-model="data.uid">
         </div>
         <span class="input-label">Drug Expiration Date</span>
         <div class="item item-input">
-          <input type="date" name="name" placeholder="Select lot expiration date" ng-model="data.name" required>
+          <input type="date" name="date" placeholder="Select lot expiration date" ng-model="expirationDate">
         </div>
         <span class="input-label">Quantity</span>
         <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.name" required>
+          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.quantity">
         </div>
-        <span class="input-label">Description</span>
-        <div class="item item-input">
-          <textarea placeholder="Additional Data" name="description" ng-model="data.description" required></textarea>
+
+        <span class="input-label">Select Product</span>
+        <div class="item item-input item-select">
+          <span class="input-label">
+              Product ID
+          </span>
+          <select id="productid" name="productid" ng-model="data.productid" >
+              <option ng-repeat="product in products">{{product.pid}}</option>
+          </select>
         </div>
-        <span class="input-label">Receiver Name</span>
-        <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.receiverName" required>
+        <div id="productDetails" style="display:none">
+          <br>
+          <h3>Product Details<br></h3>
+          <!--<input ng-model="productInfo">-->
+          <h4>Name - {{productInfo.name}}<br>
+          Non Proprietary Name - {{productInfo.nonproprietaryname}}<br>
+          Dosage Form Name - {{productInfo.dosageformname}}</h4>
         </div>
-        <span class="input-label">Receiver Address</span>
-        <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.receiverAddress" required>
+
+        <span class="input-label">Select Receiver</span>
+        <div class="item item-input item-select">
+          <span class="input-label">
+              Receiver Name
+          </span>
+          <select id="receiverId" name="productid" ng-model="data.receiverid" >
+              <option ng-repeat="receiver in receivers">{{receiver.name}}</option>
+          </select>
         </div>
+        <div id="receiverDetails" style="display:none">
+          <br>
+          <h3>Receiver Details<br></h3>
+          <!--<input ng-model="receiverInfo">-->
+          <h4>labelercode - {{receiverInfo.labelercode}}<br>
+          multichainaddress - {{receiverInfo.multichainaddress}}<br>
+          ip - {{receiverInfo.ip}}</h4>
+        </div>
+
         <button id="create-deal" class="button button-medium button-radius button-balanced button-block">
-          <label class="loginText" ng-hide="textFlag">Create Deal<label>
+          <label class="loginText" ng-hide="textFlag">Confirm<label>
         </button>
       </form>
     </div>
