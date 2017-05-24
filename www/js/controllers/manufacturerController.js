@@ -122,13 +122,13 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
       console.log(post_data);
       //console.log(post_data);
 
-      $http.post("http://10.244.51.105:8080", post_data)
+      $http.post("http://10.244.51.105:8080/drugtrade", post_data)
         .success(function (response) {
-
+          alert("Success!");
           console.log(response);
 
         }).catch(function (err) {
-
+          alert("Failed");
           console.log(err);
 
 
