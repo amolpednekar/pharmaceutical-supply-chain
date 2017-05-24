@@ -1,0 +1,48 @@
+<ion-view title="Manufacturer">
+  <ion-content>
+    <div class="screenadjust">
+      <h1 style="text-align:center">Manufacturer Portal</h1>
+      <form name="manufacturerForm" class="form item" ng-submit="ManufacturerForm(data)">
+        <span class="input-label">Manufacturer Name</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter LOT#" ng-model="data.name" required>
+        </div>
+        <span class="input-label">Lot Number</span>
+        <div class="item item-input">
+          <input type="text" name="lot" placeholder="Enter LOT#" ng-model="data.lot" required>
+        </div>
+        <span class="input-label">NDC</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter NDC#" ng-model="data.name" required>
+        </div>
+        <span class="input-label">Item UID</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter Unique Identifier of sales item" ng-model="data.name" required>
+        </div>
+        <span class="input-label">Drug Expiration Date</span>
+        <div class="item item-input">
+          <input type="date" name="name" placeholder="Select lot expiration date" ng-model="data.name" required>
+        </div>
+        <span class="input-label">Quantity</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.name" required>
+        </div>
+        <span class="input-label">Description</span>
+        <div class="item item-input">
+          <textarea placeholder="Additional Data" name="description" ng-model="data.description" required></textarea>
+        </div>
+        <span class="input-label">Receiver Name</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.receiverName" required>
+        </div>
+        <span class="input-label">Receiver Address</span>
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.receiverAddress" required>
+        </div>
+        <button id="create-deal" class="button button-medium button-radius button-balanced button-block">
+          <label class="loginText" ng-hide="textFlag">Create Deal<label>
+        </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

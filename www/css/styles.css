@@ -1,0 +1,25 @@
+.formatting{
+  margin: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+@media screen and (min-width: 720px) {
+	.screenadjust{
+
+		width:720px;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 0%);
+
+	}
+}
+
+/* Hide up-down arrows for number fields - Firefox */
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+/* Hide up-down arrows for number fields - Chrome */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
