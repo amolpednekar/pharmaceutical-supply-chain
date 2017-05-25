@@ -67,6 +67,11 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
     //   $scope.phones = data;
     //   console.log("success")
     // });
+    allTrades = [];
+
+    if (localStorage.getItem('trades') !== null) {
+      allTrades = JSON.parse(localStorage.getItem('trades'));
+    }
 
     var value;
     $scope.$on("$ionicView.beforeEnter", function () {
@@ -108,34 +113,46 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
 
     });
 
+    console.log(allTrades)
+    //console.log("Local" +localStorage.getItem('trades'));
+    if (localStorage.getItem('trades') !== null) {
+      obj = localStorage.getItem('trades');
+      console.log(JSON.parse(obj));
+    }
+
+    // On Submit of Manufacturer's Form
     $scope.ManufacturerForm = function (data) {
       $scope.expirationDateSub = new Date().getTime();
       //console.log();
       var post_data = {};
+      post_data.unitsId = [];
+      for (i = 0; i < data.quantity; i++) {
+        post_data.unitsId.push(Math.round((Math.random() * 10000) * 10000));
+      }
       post_data.manufacturerID = 1; //postion in JSON, temp hardcode
       post_data.lotNumber = $scope.lot;
       post_data.ndc = $scope.ndc;
       post_data.expirationDate = $scope.expirationDateSub;
       post_data.quantity = data.quantity;
       post_data.productInfo = $scope.productInfo;
-      post_data.receiverInfo = $scope.receiverInfo;
+      //post_data.receiverInfo = $scope.receiverInfo;
+      post_data.receiverInfo = 2;
       console.log(post_data);
-      //console.log(post_data);
 
       $http.post("http://10.244.51.105:8080/drugtrade", post_data)
         .success(function (response) {
-          alert("Success!");
+          console.log("Success!");
           console.log(response);
 
+          // Store response data in browser's local storage
+          allTrades.push(response.data);
+          localStorage.setItem('trades', JSON.stringify(allTrades));
+          $state.go('shipments');
+
+
         }).catch(function (err) {
-          alert("Failed");
+          console.log("Failed");
           console.log(err);
-
-
         });
-      $state.go('shipments');
-
     }
-
-
   }]);

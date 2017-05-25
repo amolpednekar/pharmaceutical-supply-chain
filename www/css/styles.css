@@ -14,6 +14,23 @@
 	}
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+th, td {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+/* Column separators */
+table td + td { border-left:2px solid; }
+table th + th { border-left:2px solid; }
+
+tr:nth-child(even){background-color: #f2f2f2}
+
 /* Hide up-down arrows for number fields - Firefox */
 input[type='number'] {
     -moz-appearance:textfield;
