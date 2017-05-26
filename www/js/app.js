@@ -1,6 +1,6 @@
 //mycontrollerModule = angular.module('app.controllers', ['ionic']);
 
-myApp = angular.module('app', ['ionic','app.controllers']);
+myApp = angular.module('app', ['ionic','app.controllers','ionic-toast']);
 
 myApp.run(function ($ionicPlatform,$rootScope) {
     $ionicPlatform.ready(function () {
@@ -41,8 +41,8 @@ myApp.run(function ($ionicPlatform,$rootScope) {
         controller: 'manufacturerCtrl',
         cache: false,
       })
-      .state('distriubutor', {
-        url: '/distriubutor',
+      .state('distributor', {
+        url: '/distributor',
         templateUrl: 'templates/distributor.html',
         controller: 'distributorCtrl',
         cache: false,

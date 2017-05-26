@@ -1,5 +1,5 @@
-myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
-  function ($scope, $http, $state) {
+myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
+  function ($scope, $http, $state,ionicToast) {
     $scope.manufacturer = {
       "name": "Merck Pharmaceutical",
       "address": "Fl No-f 02, Mithsu Resindency, Jofilnagar, Ponda, Ponda, Goa, Fl No-f 02, Goa 403401",
@@ -50,17 +50,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
       "user": "multichainrpc",
       "pass": "Aj2FmLFTMASMorTo3QHQnsZHkojXS2qb4iGps3tzhUdx"
 
-    }, {
-      "name": "Farmacia Salcette",
-      "address": "Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
-      "labelercode": "5876",
-      "multichainaddress": "16CzWSBPHV3gpdpRUEdX7uCUEPw9zaeK2616ve",
-      "keyspath": "./keystore/pharmkeystore/credentials.pem",
-      "ip": "169.254.216.151",
-      "port": "6999",
-      "user": "multichainrpc",
-      "pass": "HjafPtYCbspLSGd7KJ8XPqZ3G74niDiDkpyX7r9E1zLJ"
-
     }];
 
     // $http.get('productdetails.json').then(function (data) {
@@ -81,11 +70,8 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
       $scope.expirationDate = new Date();
       $('#productid').change(function () {
         selected = $('option:selected', this).attr('value');
-        console.log($scope.products.length)
         for (var i = 0; i < $scope.products.length; i++) {
           value = $scope.products[i].pid;
-          console.log("Value" + value);
-          console.log(selected);
           if (value == selected) {
             $scope.productInfo = $scope.products[i];
             $scope.$apply();
@@ -100,8 +86,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
         console.log($scope.receivers.length)
         for (var i = 0; i < $scope.receivers.length; i++) {
           value = $scope.receivers[i].name;
-          console.log("Value" + value);
-          console.log(selected);
           if (value == selected) {
             $scope.receiverInfo = $scope.receivers[i];
             $scope.$apply();
@@ -113,7 +97,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
 
     });
 
-    console.log(allTrades)
     //console.log("Local" +localStorage.getItem('trades'));
     if (localStorage.getItem('trades') !== null) {
       obj = localStorage.getItem('trades');
@@ -141,9 +124,8 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state',
 
       $http.post("http://10.244.51.105:8080/drugtrade", post_data)
         .success(function (response) {
-          console.log("Success!");
           console.log(response);
-
+          ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);
           // Store response data in browser's local storage
           allTrades.push(response.data);
           localStorage.setItem('trades', JSON.stringify(allTrades));

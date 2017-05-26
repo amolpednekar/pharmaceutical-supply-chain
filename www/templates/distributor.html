@@ -1,1 +1,89 @@
-<h1>Distributor</h1>
+<ion-view title="Distributor">
+  <ion-content>
+    <div class="screenadjust" style="text-align:center">
+
+      <h1 style="text-align:center;margin-top: 10px;">Distributor Portal</h1>
+      <form name="distributorForm" class="form item" ng-submit="DistributorSearch(data)">
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter LOT #" ng-model="data.lot">
+          <button id="distributor-search" class="button button-small button-balanced"><i class="icon ion-search"></i>
+            <label>Search<label>
+          </button>
+        </div>
+      </form>
+
+      <div id="verifyResults" style="margin-top:25px;display:none;">
+
+        <div class="card">
+          <div class="item item-divider">
+            Search Result
+          </div>
+          <div class="item item-text-wrap cardFormatting">
+            <p>Lot Number - {{drugTrade.lotnumber}}</p>
+            <p>NDC - {{drugTrade.nationaldrugcode}}</p>
+            <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
+            <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
+            <p>Quantity - {{drugTrade.quantity}}</p>
+            <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="card">
+          <div class="item item-divider">
+            Supply Flow
+          </div>
+          <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
+            <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+            <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
+            <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+            <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+            <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+            <p ng-if="trade.recipientsignature">Sender Signature - {{trade.recipientsignature}}</p>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="item item-divider">
+            Verification Status
+          </div>
+          <div class="item item-text-wrap">
+            <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
+          </div>
+        </div>
+
+      </div>
+
+      <form name="distributorForm2" id="distributorForm2" class="form item" style="display:none" ng-submit="DistributorSend(data)">
+        <span class="input-label">Select Pharmacy</span>
+
+        <div class="item item-input item-select">
+          <span class="input-label">
+              Pharmacy Name
+          </span>
+          <select id="pharmacyId" name="pharmacyId" ng-model="data.receiverid">
+              <option ng-repeat="pharmacy in pharmacies">{{pharmacy.name}}</option>
+          </select>
+        </div>
+
+        <div class="card" id="pharmacyDetails" style="display:none">
+          <div class="item item-divider">
+            Pharmarcy Details
+          </div>
+          <div class="item item-text-wrap cardFormatting">
+            <p>Pharmacy Name - {{pharmarcyInfo.name}}</p>
+            <p>Address - {{pharmarcyInfo.address}}</p>
+            <p>Labeler Code - {{pharmarcyInfo.labelercode}}</p>
+            <p>Multichain Address - {{pharmarcyInfo.multichainaddress}}</p>
+          </div>
+        </div>
+        <button id="distributor-send" class="button button-small button-balanced" style="margin-top:10px; display:none">
+          <label>Send Shipment<label>
+        </button>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

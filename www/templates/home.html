@@ -1,14 +1,21 @@
 <ion-view title="Home">
+  <ion-content class="background">
   <div class="screenadjust formatting">
-    <h1>Supply Chain Manager - Home</h1>
-
-    <div class="row">
-      <div class="col col-50"><a ui-sref="manufacturer">Manufacturer</a></div>
-      <div class="col col-50"><a ui-sref="distributor">Distributor</a></div>
-    </div>
-    <div class="row formatting">
-      <div class="col col-50"><a ui-sref="pharmacy">Pharmacy</a></div>
-      <div class="col col-50"><a ui-sref="customer">Customer</a></div>
+    <h1 style="text-decoration:underline; margin-top:20px">Supply Chain Manager - Home</h1>
+      <div style="margin-top:50px">
+        <div class="row">
+          <div class="col col-50"><a ui-sref="manufacturer"><h2>Manufacturer</h2></a></div>
+          <div class="col col-50"><a ui-sref="shipments"><h2>Shipments</h2></a></div>
+        </div>
+        <div class="row formatting">
+          <div class="col col-50"><a ui-sref="distributor"><h2>Distributor</h2></a></div>
+          <div class="col col-50"><a ui-sref="pharmacy"><h2>Pharmacy</h2></a></div>
+        </div>
+        <div class="row formatting">
+          <div class="col col-25"><a ui-sref="pharmacy"><h2></h2></a></div>
+          <div class="col col-50"><a ui-sref="customer"><h2>Customer</h2></a></div>
+          <div class="col col-25"><a ui-sref="customer"><h2></h2></a></div>
     </div>
   </div>
+  </ion-content>
 </ion-view>

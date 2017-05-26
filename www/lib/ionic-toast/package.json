@@ -1,0 +1,19 @@
+{
+  "name": "ionic-toast",
+  "version": "0.4.1",
+  "description": "A toast for IONIC framework",
+  "main": [
+    "./dist/ionic-toast.bundle.min.js",
+    "./dist/style.css"
+  ],
+  "scripts": {},
+  "author": "https://github.com/rajeshwarpatlolla, rajeshwar.patlolla@gmail.com",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-css2js": "^1.0.2",
+    "gulp-uglify": "^1.5.3"
+  }
+}

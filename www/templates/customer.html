@@ -1,1 +1,34 @@
-<h1>Customer</h1>
+<ion-view title="Customer">
+  <ion-content>
+    <div class="screenadjust" style="text-align:center">
+
+      <h1 style="text-align:center">Customer Portal</h1>
+      <form name="customerForm" class="form item" ng-submit="CustomerSearch(data)">
+        <div class="item item-input">
+          <input type="text" name="name" placeholder="Enter Medicine ID" ng-model="data.mid">
+          <button id="Customer-search" class="button button-small button-balanced"><i class="icon ion-search"></i>
+            <label>Search<label>
+          </button>
+        </div>
+      </form>
+
+      <div id="searchResults" style="margin-top:25px;display:none;">
+        <div class="card">
+          <div class="item item-divider" >
+            <h3 class="font-bold">Medcine found - {{drugTrade.unitsid[0]}} </h3>
+          </div>
+          <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
+            <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+            <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
+            <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+            <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+            <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+            <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

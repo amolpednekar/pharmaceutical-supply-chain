@@ -1,0 +1,40 @@
+{
+  "name": "ionic-toast",
+  "version": "0.4.1",
+  "authors": [
+    "rajeshwarpatlolla <rajeshwar.patlolla@gmail.com>"
+  ],
+  "description": "'ionic-toast' bower component for ionic framework applications",
+  "main": [
+    "./dist/ionic-toast.bundle.min.js"
+  ],
+  "keywords": [
+    "ionic-toast",
+    "toast",
+    "ionic",
+    "toast for ionic",
+    "toast for ionic framework"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rajeshwarpatlolla/ionic-toast",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic": ">=0.9.27"
+  },
+  "_release": "0.4.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.4.1",
+    "commit": "d2e9fcab0bf0527ceecfe3fb78f8d1f47fecb436"
+  },
+  "_source": "https://github.com/rajeshwarpatlolla/ionic-toast.git",
+  "_target": "^0.4.1",
+  "_originalSource": "ionic-toast",
+  "_direct": true
+}

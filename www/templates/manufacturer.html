@@ -1,5 +1,5 @@
 <ion-view title="Manufacturer">
-  <ion-content>
+  <ion-content overflow-scroll="true">
     <div class="screenadjust">
       <h1 style="text-align:center">Manufacturer Portal</h1>
       <form name="manufacturerForm" class="form item" ng-submit="ManufacturerForm(data)">
@@ -34,12 +34,16 @@
           </select>
         </div>
         <div id="productDetails" style="display:none">
-          <br>
-          <h3>Product Details<br></h3>
-          <!--<input ng-model="productInfo">-->
-          <h4>Name - {{productInfo.name}}<br>
-          Non Proprietary Name - {{productInfo.nonproprietaryname}}<br>
-          Dosage Form Name - {{productInfo.dosageformname}}</h4>
+          <div class="card">
+          <div class="item item-divider">
+            Product Details
+          </div>
+          <div class="item item-text-wrap">
+            Name - {{productInfo.name}}<br>
+            Non Proprietary Name - {{productInfo.nonproprietaryname}}<br>
+            Dosage Form Name - {{productInfo.dosageformname}}
+          </div>
+          </div>
         </div>
 
         <span class="input-label">Select Receiver</span>
@@ -52,16 +56,21 @@
           </select>
         </div>
         <div id="receiverDetails" style="display:none">
-          <br>
-          <h3>Receiver Details<br></h3>
-          <!--<input ng-model="receiverInfo">-->
-          <h4>labelercode - {{receiverInfo.labelercode}}<br>
-          multichainaddress - {{receiverInfo.multichainaddress}}<br>
-          ip - {{receiverInfo.ip}}</h4>
+          <div class="card">
+          <div class="item item-divider">
+            Receiver Details
+          </div>
+          <div class="item item-text-wrap">
+          Labeler Code - {{receiverInfo.labelercode}}<br>
+          Multichain Address - {{receiverInfo.multichainaddress}}<br>
+          IP - {{receiverInfo.ip}}
+          </div>
+          </div>
+
         </div>
 
         <button id="create-deal" class="button button-medium button-radius button-balanced button-block">
-          <label class="loginText" ng-hide="textFlag">Confirm<label>
+          <label>Confirm<label>
         </button>
       </form>
     </div>

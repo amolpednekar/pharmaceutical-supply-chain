@@ -1,15 +1,19 @@
-<h1 style="margin:15px; text-align:center">Shipments</h1>
-<div style="overflow-x:auto; margin:15px;">
-  <table>
-    <tr style="font-weight:bold">
-      <th style="padding: 10px;">Transaction ID</th>
-      <th style="padding: 10px;">Lot Number</th>
-      <th style="padding: 10px;">Receipient Name</th>
-    </tr>
-    <tr ng-repeat="trade in trades">
-      <td  style="padding: 10px;">{{trade.lotnumber}}</td>
-      <td  style="padding: 10px;">{{trade.recipientname}}</td>
-      <td  style="padding: 10px;">{{trade.drugstradetxid}}</td>
-    </tr>
-  </table>
-</div>
+<ion-view title="Shipments">
+  <ion-content>
+    <h1 style="margin:15px; text-align:center">Shipments</h1>
+    <div style="overflow-x:auto; margin:15px;">
+      <table>
+        <tr style="font-weight:bold">
+          <th style="padding: 10px;">Transaction ID</th>
+          <th style="padding: 10px;">Lot Number</th>
+          <th style="padding: 10px;">Receipient Name</th>
+        </tr>
+        <tr ng-repeat="trade in trades">
+          <td style="padding: 10px;">{{trade.lotnumber}}</td>
+          <td style="padding: 10px;">{{trade.recipientname}}</td>
+          <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
+        </tr>
+      </table>
+    </div>
+  </ion-content>
+</ion-view>
