@@ -1,0 +1,86 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "qrcode-generator@^1.1.0",
+        "scope": null,
+        "escapedName": "qrcode-generator",
+        "name": "qrcode-generator",
+        "rawSpec": "^1.1.0",
+        "spec": ">=1.1.0 <2.0.0",
+        "type": "range"
+      },
+      "/home/amol/workspace/Supply-Chain-POC/frontend/node_modules/angular-qrcode"
+    ]
+  ],
+  "_from": "qrcode-generator@>=1.1.0 <2.0.0",
+  "_id": "qrcode-generator@1.2.0",
+  "_inCache": true,
+  "_location": "/qrcode-generator",
+  "_nodeVersion": "6.9.1",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/qrcode-generator-1.2.0.tgz_1490761201884_0.710750833619386"
+  },
+  "_npmUser": {
+    "name": "kazuhikoarase",
+    "email": "kazuhiko.arase@gmail.com"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "qrcode-generator@^1.1.0",
+    "scope": null,
+    "escapedName": "qrcode-generator",
+    "name": "qrcode-generator",
+    "rawSpec": "^1.1.0",
+    "spec": ">=1.1.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/angular-qrcode"
+  ],
+  "_resolved": "https://registry.npmjs.org/qrcode-generator/-/qrcode-generator-1.2.0.tgz",
+  "_shasum": "f1865463f1786547ebb090e7c430bf3caf43a017",
+  "_shrinkwrap": null,
+  "_spec": "qrcode-generator@^1.1.0",
+  "_where": "/home/amol/workspace/Supply-Chain-POC/frontend/node_modules/angular-qrcode",
+  "author": {
+    "name": "Kazuhiko Arase"
+  },
+  "bugs": {
+    "url": "https://github.com/kazuhikoarase/qrcode-generator/issues"
+  },
+  "dependencies": {},
+  "description": "QR Code Generator implementation in JavaScript.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "f1865463f1786547ebb090e7c430bf3caf43a017",
+    "tarball": "https://registry.npmjs.org/qrcode-generator/-/qrcode-generator-1.2.0.tgz"
+  },
+  "homepage": "https://github.com/kazuhikoarase/qrcode-generator#readme",
+  "keywords": [
+    "qr",
+    "qrcode",
+    "generator"
+  ],
+  "license": "MIT",
+  "main": "qrcode.js",
+  "maintainers": [
+    {
+      "name": "kazuhikoarase",
+      "email": "kazuhiko.arase@gmail.com"
+    }
+  ],
+  "name": "qrcode-generator",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuhikoarase/qrcode-generator.git"
+  },
+  "scripts": {},
+  "types": "qrcode.d.ts",
+  "version": "1.2.0"
+}

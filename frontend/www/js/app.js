@@ -1,6 +1,6 @@
 //mycontrollerModule = angular.module('app.controllers', ['ionic']);
 
-myApp = angular.module('app', ['ionic','app.controllers','ionic-toast']);
+myApp = angular.module('app', ['ionic','app.controllers','ionic-toast','qrScanner','monospaced.qrcode']);
 
 myApp.run(function ($ionicPlatform,$rootScope) {
     $ionicPlatform.ready(function () {

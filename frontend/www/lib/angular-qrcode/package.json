@@ -1,0 +1,95 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "angular-qrcode",
+        "scope": null,
+        "escapedName": "angular-qrcode",
+        "name": "angular-qrcode",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/amol/workspace/Supply-Chain-POC/frontend"
+    ]
+  ],
+  "_from": "angular-qrcode@latest",
+  "_id": "angular-qrcode@7.2.0",
+  "_inCache": true,
+  "_location": "/angular-qrcode",
+  "_nodeVersion": "7.5.0",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/angular-qrcode-7.2.0.tgz_1487544266191_0.1748349943663925"
+  },
+  "_npmUser": {
+    "name": "monospaced",
+    "email": "scott@monospaced.com"
+  },
+  "_npmVersion": "4.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "angular-qrcode",
+    "scope": null,
+    "escapedName": "angular-qrcode",
+    "name": "angular-qrcode",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-qrcode/-/angular-qrcode-7.2.0.tgz",
+  "_shasum": "c6e79e1b06c672a59a06b65b4ab465dd29e63fc6",
+  "_shrinkwrap": null,
+  "_spec": "angular-qrcode",
+  "_where": "/home/amol/workspace/Supply-Chain-POC/frontend",
+  "author": {
+    "name": "Scott Boyle",
+    "email": "scott@monospaced.com",
+    "url": "https://scottboyle.co.uk"
+  },
+  "bugs": {
+    "url": "http://github.com/monospaced/angular-qrcode/issues"
+  },
+  "dependencies": {
+    "angular": ">=1.0.6",
+    "qrcode-generator": "^1.1.0"
+  },
+  "description": "QR Code elements for AngularJS.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "c6e79e1b06c672a59a06b65b4ab465dd29e63fc6",
+    "tarball": "https://registry.npmjs.org/angular-qrcode/-/angular-qrcode-7.2.0.tgz"
+  },
+  "files": [
+    "angular-qrcode.js",
+    "package.json"
+  ],
+  "gitHead": "8731cdcb938ec0b7777f3c9ee8c2473013360e9c",
+  "homepage": "http://monospaced.github.io/angular-qrcode/",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "qrcode"
+  ],
+  "license": "MIT",
+  "main": "angular-qrcode.js",
+  "maintainers": [
+    {
+      "name": "monospaced",
+      "email": "scott@monospaced.com"
+    }
+  ],
+  "name": "angular-qrcode",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/monospaced/angular-qrcode.git"
+  },
+  "scripts": {},
+  "version": "7.2.0"
+}

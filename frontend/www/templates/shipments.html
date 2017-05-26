@@ -29,11 +29,13 @@
           <th style="padding: 10px;">Transaction ID</th>
           <th style="padding: 10px;">Lot Number</th>
           <th style="padding: 10px;">Receipient Name</th>
+          <th style="padding: 10px;">QR Code</th>
         </tr>
         <tr ng-repeat="trade in trades">
           <td style="padding: 10px;">{{trade.lotnumber}}</td>
           <td style="padding: 10px;">{{trade.recipientname}}</td>
           <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
+          <td style="padding: 10px;"><qrcode size="200" data="trade.drugstradetxid"></qrcode></td>
         </tr>
       </table>
     </div>
