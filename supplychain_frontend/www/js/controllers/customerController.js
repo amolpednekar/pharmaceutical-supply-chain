@@ -1,5 +1,5 @@
-myApp.controller('customerCtrl', ['$scope', '$http',
-  function ($scope, $http) {
+myApp.controller('customerCtrl', ['$scope', '$http','ionicToast',
+  function ($scope, $http,ionicToast) {
     $scope.greeting = 'Hola!';
 
     $scope.CustomerSearch = function (data) {
@@ -20,15 +20,9 @@ myApp.controller('customerCtrl', ['$scope', '$http',
           if($scope.searchResult!== -1){
             $('#searchResults').show();
           }
-          // $('#verifyResults').show();
-          // if ($scope.tradeFlow.length == 1 || $scope.tradeFlow.length == 4) {
-          //   // Do nothing
-          //   $('#pharmacyForm2').hide();
-          // } else {
-          //   $('#pharmacyForm2').show();
-          // }
         }).catch(function (err) {
           console.log(err);
+          ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);
         });
     }
 

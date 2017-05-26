@@ -134,6 +134,7 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
         }).catch(function (err) {
           console.log("Failed");
+          ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
           console.log(err);
         });
     }

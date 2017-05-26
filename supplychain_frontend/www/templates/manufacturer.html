@@ -1,6 +1,29 @@
 <ion-view title="Manufacturer">
-  <ion-content overflow-scroll="true">
+  <ion-content>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <a class="navbar-brand" href="#">Supply Chain Manager</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a ui-sref="manufacturer">Manufacturer</a></li>
+            <li><a ui-sref="shipments">Shipments</a></li>
+            <li><a ui-sref="distributor">Distributor</a></li>
+            <li><a ui-sref="pharmacy">Pharmacy</a></li>
+            <li><a ui-sref="customer">Customer</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="screenadjust">
+
       <h1 style="text-align:center">Manufacturer Portal</h1>
       <form name="manufacturerForm" class="form item" ng-submit="ManufacturerForm(data)">
         <span class="input-label">Manufacturer Name</span>
@@ -29,20 +52,19 @@
           <span class="input-label">
               Product ID
           </span>
-          <select id="productid" name="productid" ng-model="data.productid" >
+          <select id="productid" name="productid" ng-model="data.productid">
               <option ng-repeat="product in products">{{product.pid}}</option>
           </select>
         </div>
         <div id="productDetails" style="display:none">
           <div class="card">
-          <div class="item item-divider">
-            Product Details
-          </div>
-          <div class="item item-text-wrap">
-            Name - {{productInfo.name}}<br>
-            Non Proprietary Name - {{productInfo.nonproprietaryname}}<br>
-            Dosage Form Name - {{productInfo.dosageformname}}
-          </div>
+            <div class="item item-divider">
+              Product Details
+            </div>
+            <div class="item item-text-wrap">
+              Name - {{productInfo.name}}<br> Non Proprietary Name - {{productInfo.nonproprietaryname}}<br> Dosage Form Name
+              - {{productInfo.dosageformname}}
+            </div>
           </div>
         </div>
 
@@ -51,20 +73,18 @@
           <span class="input-label">
               Receiver Name
           </span>
-          <select id="receiverId" name="productid" ng-model="data.receiverid" >
+          <select id="receiverId" name="productid" ng-model="data.receiverid">
               <option ng-repeat="receiver in receivers">{{receiver.name}}</option>
           </select>
         </div>
         <div id="receiverDetails" style="display:none">
           <div class="card">
-          <div class="item item-divider">
-            Receiver Details
-          </div>
-          <div class="item item-text-wrap">
-          Labeler Code - {{receiverInfo.labelercode}}<br>
-          Multichain Address - {{receiverInfo.multichainaddress}}<br>
-          IP - {{receiverInfo.ip}}
-          </div>
+            <div class="item item-divider">
+              Receiver Details
+            </div>
+            <div class="item item-text-wrap">
+              Labeler Code - {{receiverInfo.labelercode}}<br> Multichain Address - {{receiverInfo.multichainaddress}}<br>              IP - {{receiverInfo.ip}}
+            </div>
           </div>
 
         </div>

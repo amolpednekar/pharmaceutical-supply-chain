@@ -57,6 +57,7 @@ angular.module('app.controllers', [])
 
           }).catch(function (err) {
             console.log(err);
+            ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
           });
       }
 
@@ -74,6 +75,7 @@ angular.module('app.controllers', [])
         }, function (response) {
           // this function handles error
           console.log("Failure!");
+          ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
           console.log(response);
         });
 
