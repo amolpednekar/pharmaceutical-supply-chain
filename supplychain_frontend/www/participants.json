@@ -1,0 +1,47 @@
+[{
+	"name":"The Directorate of Food and Drugs Administration",
+	"address":"Dhanwantari, Opposite Shrine of the Holy Cross, Bambolim - Goa",
+	"labelercode":"0754",
+	"multichainaddress":"1H6R75cnRYqtxQHG8t58arhAi1qhCRdjP5Zkm7",
+	"keyspath":"./keystore/fdakeystore/credentials.pem",
+	"ip":"169.254.216.151",
+	"port":"7354",
+	"user":"multichainrpc",
+	"pass":"6UGY7KncSEWVJQ3TLsUvZHHm5J5MK7cSKrGJVBiPMzhQ"
+
+},{
+	"name":"Merck Pharmaceutical",
+	"address":"Fl No-f 02, Mithsu Resindency, Jofilnagar, Ponda, Ponda, Goa, Fl No-f 02, Goa 403401",
+	"labelercode":"8532",
+	"multichainaddress":"1GvLczuVCVjaN78gB7BESF6rA5P7UhcvroQhK6",
+	"keyspath":"./keystore/manfkeystore/credentials.pem",
+	"ip":"169.254.216.151",
+	"port":"8999",
+	"user":"multichainrpc",
+	"pass":"3sALXzUAct65Mv2CxfKrDZgUDJ4GhJWootWzshKsM41A"
+
+
+},{
+	"name":"Orient Pharmaceutical Distributor",
+	"address":"1-2,Orient Tower,Behind Loyala High School, Margao, Goa, 403601",
+	"labelercode":"7843",
+	"multichainaddress":"12syYEdrRa1WQFhQJdnCSHrJt8a8jChiMfzRCs",
+	"keyspath":"./keystore/distkeystore/credentials.pem",
+	"ip":"169.254.216.151",
+	"port":"7999",
+	"user":"multichainrpc",
+	"pass":"Aj2FmLFTMASMorTo3QHQnsZHkojXS2qb4iGps3tzhUdx"
+
+},{
+
+	"name":"Farmacia Salcette",
+	"address":"Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
+	"labelercode":"5876",
+	"multichainaddress":"16CzWSBPHV3gpdpRUEdX7uCUEPw9zaeK2616ve",
+	"keyspath":"./keystore/pharmkeystore/credentials.pem",
+	"ip":"169.254.216.151",
+	"port":"6999",
+	"user":"multichainrpc",
+	"pass":"HjafPtYCbspLSGd7KJ8XPqZ3G74niDiDkpyX7r9E1zLJ"
+
+}]
