@@ -33,23 +33,33 @@
           </button>
         </div>
       </form>
-      <qr-scanner ng-success="onSuccess(data)" ng-error="onError(error)" width="400" height="300"></qr>
-      <div id="searchResults" style="margin-top:25px;display:none;">
-        <div class="card">
-          <div class="item item-divider" >
-            <h3 class="font-bold">Medcine found - {{drugTrade.unitsid[0]}} </h3>
+      <!--<qr-scanner ng-success="onSuccess(data)" ng-error="onError(error)" width="400" height="300"></qr>-->
+        <div id="searchResults" style="margin-top:25px;display:none;">
+          <div class="card">
+            <div class="item item-divider">
+              <h3 class="font-bold">Medcine found - {{drugTrade.unitsid[0]}} </h3>
+            </div>
+            <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
+              <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+              <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+              <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
+              <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+              <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+              <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+              <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
+            </div>
           </div>
-          <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
-            <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-            <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
-            <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-            <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-            <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-            <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
+
+
+          <div class="card">
+            <div class="item item-divider">
+              Verification Status
+            </div>
+            <div class="item item-text-wrap">
+              <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
+            </div>
           </div>
         </div>
-      </div>
 
     </div>
   </ion-content>

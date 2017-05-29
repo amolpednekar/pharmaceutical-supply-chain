@@ -1,19 +1,19 @@
 myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
   function ($scope, $http, ionicToast) {
     $scope.data = {};
-	
-		
-      $scope.onSuccess = function (data) {
-        console.log(data);
-				$scope.data.mid = data;
-      };
-      $scope.onError = function (error) {
-        console.log(error);
-      };
-      $scope.onVideoError = function (error) {
-        console.log(error);
-      };
-		
+
+
+    $scope.onSuccess = function (data) {
+      console.log(data);
+      $scope.data.mid = data;
+    };
+    $scope.onError = function (error) {
+      console.log(error);
+    };
+    $scope.onVideoError = function (error) {
+      console.log(error);
+    };
+
     $scope.CustomerSearch = function (data) {
 
       result = data.mid.split('-');
@@ -29,9 +29,11 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
 
           console.log($scope.drugTrade.unitsid)
           $scope.searchResult = $scope.drugTrade.unitsid.indexOf(parseInt(result[1]));
-          //if($scope.searchResult!== -1){
-          $('#searchResults').show();
-          //}
+          if ($scope.searchResult !== -1) {
+            $('#searchResults').show();
+          } else {
+            ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);
+          }
         }).catch(function (err) {
           console.log(err);
           ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);
