@@ -1,16 +1,11 @@
 myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
   function ($scope, $http, ionicToast) {
-    $scope.greeting = 'Hola!';
-
-    $scope.CustomerSearch = function (data) {
-
-      result = data.mid.split('-');
-      console.log(result[1]);
-
+    $scope.data = {};
+	
+		
       $scope.onSuccess = function (data) {
         console.log(data);
-        $scope.data.mid = data;
-        $scope.$apply();
+				$scope.data.mid = data;
       };
       $scope.onError = function (error) {
         console.log(error);
@@ -18,6 +13,11 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
       $scope.onVideoError = function (error) {
         console.log(error);
       };
+		
+    $scope.CustomerSearch = function (data) {
+
+      result = data.mid.split('-');
+      console.log(result[1]);
 
       $http.get("http://10.244.51.105:8080/drug/" + result[0] + "/2/verify")
         .success(function (response) {
