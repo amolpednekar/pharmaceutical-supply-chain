@@ -1,3 +1,9 @@
+.scroll {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
 .background{
   background: url(../img/background.jpg) no-repeat center;
   background-size:cover;

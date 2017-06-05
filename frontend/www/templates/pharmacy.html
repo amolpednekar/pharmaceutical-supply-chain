@@ -1,5 +1,5 @@
 <ion-view title="Pharmacy">
-  <ion-content>
+  <ion-content overflow-scroll="true">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -47,6 +47,7 @@
             <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
             <p>Quantity - {{drugTrade.quantity}}</p>
             <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+            <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{$index+1}} -{{unit}} | &nbsp</span></p>
           </div>
         </div>
 
@@ -59,9 +60,9 @@
           <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
             <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
             <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
             <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
             <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
             <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
             <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
           </div>

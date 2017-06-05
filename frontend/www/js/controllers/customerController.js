@@ -2,17 +2,17 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
   function ($scope, $http, ionicToast) {
     $scope.data = {};
 
-
-    $scope.onSuccess = function (data) {
-      console.log(data);
-      $scope.data.mid = data;
-    };
-    $scope.onError = function (error) {
-      console.log(error);
-    };
-    $scope.onVideoError = function (error) {
-      console.log(error);
-    };
+    // QR Scanner Test
+    // $scope.onSuccess = function (data) {
+    //   console.log(data);
+    //   $scope.data.mid = data;
+    // };
+    // $scope.onError = function (error) {
+    //   console.log(error);
+    // };
+    // $scope.onVideoError = function (error) {
+    //   console.log(error);
+    // };
 
     $scope.CustomerSearch = function (data) {
 
