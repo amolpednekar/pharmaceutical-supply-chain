@@ -17,6 +17,18 @@ $ sudo apt-get install -y nodejs
 $ npm install -g ionic
 ```
 
+Start the network
+```bash
+
+cd /
+
+multichaind blockchain -datadir=/root/MultiChainDir/FDANode -port=6451 -rpcport=6450 -daemon
+multichaind blockchain -datadir=/root/MultiChainDir/PharmNode/ -port=7000 -rpcport=6999 -daemon
+multichaind blockchain -datadir=/root/MultiChainDir/DistNode/ -port=8000 -rpcport=7999 -daemon
+multichaind blockchain -datadir=/root/MultiChainDir/ManfNode/ -port=9000 -rpcport=8999 -daemon
+
+```
+
 In the folder 'SupplyChainServer' run: 
 
 ```bash
