@@ -64,6 +64,11 @@ myApp.run(function ($ionicPlatform,$rootScope) {
         templateUrl: 'templates/shipments.html',
         controller: 'shipmentsCtrl',
         cache: false,
+      }).state('shipmentDetails',{
+        url: '/shipments/:shipmentId',
+        templateUrl: 'templates/shipmentDetails.html',
+        controller: 'shipmentsDetailsCtrl',
+        cache: false,
       });
 
 
