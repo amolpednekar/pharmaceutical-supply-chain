@@ -5,6 +5,12 @@ exports.drugTrade = function(req,response) {
 	//console.log(participants)
 	var to = participants[req.body.receiverInfo]
 	
+	// Save manufacturer's address to post to use his stream
+	var manufac = participants[1];
+	var fda = participant[0];
+
+	console.log("manufac_address",manufac.multichainaddress);
+	console.log("to_address",to.multichainaddress);
 	var multichain = require("multichain-node")({port: participant.port,
 												 host: "127.0.0.1",
 												 user: participant.user,
@@ -62,6 +68,7 @@ exports.drugTrade = function(req,response) {
 	
 	console.log("Encrypted trade details: ",encryptedtradedetails)
 	
+	// post 
 	multichain.subscribe({stream: 'pubkeys'}, (err, res) => {
 		
 		if(err){
@@ -127,7 +134,7 @@ exports.drugTrade = function(req,response) {
 														
 													}else{
 													
-														response.send({success:1,data:{drugstradetxid:drugstradetx,symkeytxid:symkeytx,lotnumber:req.body.lotNumber,recipientname:to.name}});
+														//response.send({success:1,data:{drugstradetxid:drugstradetx,symkeytxid:symkeytx,lotnumber:req.body.lotNumber,recipientname:to.name}});
 													}
 											
 												});
@@ -142,9 +149,80 @@ exports.drugTrade = function(req,response) {
 					});
 			}
 		});
+
 		
 	});
 	
+	// post symmetric key encrypted by manufacterer's public key onto the symkeys stream 
+	// so that he can also access this data
+	multichain.subscribe({stream: 'pubkeys'}, (err, res) => {
+		
+		if(err){
+			response.send({success:0,data:err});
+		}
+		console.log("Subscribe: ",res);
+	
+		console.log("To address: ",to.multichainaddress);
+		multichain.listStreamPublisherItems({stream: 'pubkeys',address:manufac.multichainaddress,verbose: true}, (err, items) => {
+				
+				if(err){
+				
+					console.log(err)
+					response.send({success:0,data:err});
+					
+				}else{
+					
+					var publickeyHex = items[items.length-1].data;
+					var publicKey = new Buffer(publickeyHex, 'hex').toString('ascii')
+					
+					var public_key = new NodeRSA();
+					public_key.importKey(publicKey, 'pkcs8-public-pem');
+					var encrypted_symkey = public_key.encrypt(drug_trade_hash, 'base64');
+					console.log('Symkey encrypted: ', encrypted_symkey);
+				
+					multichain.subscribe({stream: 'symkeys'}, (err, res) => {
+					
+						if(err){
+							console.log(err)
+							response.send({success:0,data:err});
+							
+						}else{
+						
+							multichain.subscribe({stream: 'drugstrades'}, (err, res) => {
+							
+								if(err){
+										console.log(err)
+										response.send({success:0,data:err});
+								}else{
+								
+									 console.log("Time to put data onto streams");
+									 var encrypted_symkeyhex = new Buffer(encrypted_symkey).toString('hex');
+									 console.log('Symkey encrypted(Hex): ', encrypted_symkeyhex);
+									 //post encrypted sym key onto symkey stream
+									 //post encrypted trade data onto symkey stream
+									 multichain.publishFrom({from:manufac.multichainaddress, stream:"symkeys", key:drugtrade.lotnumber+"_"+manufac.multichainaddress,data:encrypted_symkeyhex},(err,symkeytx) => {
+					
+											if(err){
+												console.log(err);
+												response.send({success:0,data:err});
+												
+											}else{
+												response.send({success:1});
+											}
+									});
+									
+								}
+							
+							});						
+						}
+					});
+			}
+		});
+
+		
+	});
+	
+	// TODO FDA CAN ACCESS THE DATA TOO! REPEAT ABOVE STEP WITH FDA's PubKey
 };
 exports.drugVerify = function(req,response) {
 
