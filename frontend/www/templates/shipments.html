@@ -31,7 +31,7 @@
           <th style="padding: 10px;">Transaction ID</th>
           <!--<th style="padding: 10px;">QR Code</th>-->
         </tr>
-        <tr ng-repeat="trade in trades">
+        <tr ng-repeat="trade in trades track by $index">
           <td style="padding: 10px;">{{trade.lotnumber}}</td>
           <td style="padding: 10px;">{{trade.recipientname}}</td>
           <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
