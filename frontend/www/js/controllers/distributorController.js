@@ -37,7 +37,7 @@ angular.module('app.controllers', [])
 
         console.log(data);
 
-        $http.get("http://10.244.51.105:8080/drug/" + data.lot + "/2/verify")
+        $http.get("http://10.51.233.255:8080/drug/" + data.lot + "/2/verify")
           .success(function (response) {
             console.log(response);
             $scope.tradeDetails = response.data.tradedetails;
@@ -67,7 +67,7 @@ angular.module('app.controllers', [])
         post_data.pharamacyId = 3;
         post_data.tradeDetails = $scope.tradeDetails;
 
-        $http.put("http://10.244.51.105:8080/drugtrade", post_data).then(function (response) {
+        $http.put("http://10.51.233.255:8080/drugtrade", post_data).then(function (response) {
           // This function handles success
           ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);
           console.log(response);

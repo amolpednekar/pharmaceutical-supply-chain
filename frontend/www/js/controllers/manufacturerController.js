@@ -61,6 +61,8 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
     if (localStorage.getItem('trades') !== null) {
       allTrades = JSON.parse(localStorage.getItem('trades'));
     }
+    console.log(localStorage.getItem('trades') !== null)
+    console.log("All Trades",allTrades)
 
     var value;
     $scope.$on("$ionicView.beforeEnter", function () {
@@ -98,10 +100,10 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
     });
 
     //console.log("Local" +localStorage.getItem('trades'));
-    if (localStorage.getItem('trades') !== null) {
-      obj = localStorage.getItem('trades');
-      console.log(JSON.parse(obj));
-    }
+    // if (localStorage.getItem('trades') !== null) {
+    //   obj = localStorage.getItem('trades');
+    //   console.log(JSON.parse(obj));
+    // }
 
     // On Submit of Manufacturer's Form
     $scope.ManufacturerForm = function (data) {
@@ -122,7 +124,7 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       post_data.receiverInfo = 2;
       console.log(post_data);
 
-      $http.post("http://10.244.51.105:8080/drugtrade", post_data)
+      $http.post("http://10.51.233.255:8080/drugtrade", post_data)
         .success(function (response) {
           console.log(response);
           ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);

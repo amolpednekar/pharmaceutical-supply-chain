@@ -134,7 +134,7 @@ exports.drugTrade = function(req,response) {
 														
 													}else{
 													
-														//response.send({success:1,data:{drugstradetxid:drugstradetx,symkeytxid:symkeytx,lotnumber:req.body.lotNumber,recipientname:to.name}});
+														response.send({success:1,data:{drugstradetxid:drugstradetx,symkeytxid:symkeytx,lotnumber:req.body.lotNumber,recipientname:to.name}});
 													}
 											
 												});
@@ -207,23 +207,19 @@ exports.drugTrade = function(req,response) {
 												response.send({success:0,data:err});
 												
 											}else{
-												response.send({success:1});
+												console.log("manufacturer sym key success!")
 											}
-									});
-									
-								}
 							
-							});						
+									});						
+								}
+							});
 						}
 					});
-			}
-		});
-
-		
-	});
-	
+				}
+			});
 	// TODO FDA CAN ACCESS THE DATA TOO! REPEAT ABOVE STEP WITH FDA's PubKey
-};
+	});
+}
 exports.drugVerify = function(req,response) {
 
 	var lotnumber = req.params.lot;

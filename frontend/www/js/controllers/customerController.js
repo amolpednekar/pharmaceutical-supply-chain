@@ -19,7 +19,7 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
       result = data.mid.split('-');
       console.log(result[1]);
 
-      $http.get("http://10.244.51.105:8080/drug/" + result[0] + "/2/verify")
+      $http.get("http://10.51.233.255:8080/drug/" + result[0] + "/3/verify")
         .success(function (response) {
           console.log(response);
           $scope.tradeDetails = response.data.tradedetails;
