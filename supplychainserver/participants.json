@@ -2,46 +2,46 @@
 	"name":"The Directorate of Food and Drugs Administration",
 	"address":"Dhanwantari, Opposite Shrine of the Holy Cross, Bambolim - Goa",
 	"labelercode":"0754",
-	"multichainaddress":"1H6R75cnRYqtxQHG8t58arhAi1qhCRdjP5Zkm7",
+	"multichainaddress":"1X38fSjFH2jFjtM3H91zVDpWMs3SWgkc8FyhdG",
 	"keyspath":"./keystore/fdakeystore/credentials.pem",
-	"ip":"169.254.216.151",
-	"port":"7354",
+	"ip":"10.51.233.255",
+	"port":"6450",
 	"user":"multichainrpc",
-	"pass":"6UGY7KncSEWVJQ3TLsUvZHHm5J5MK7cSKrGJVBiPMzhQ"
+	"pass":"7QDnYNusVZrALVZ7imr1656f1c8VLxGvwZZk1Rs7bWAo"
 
 },{
 	"name":"Merck Pharmaceutical",
 	"address":"Fl No-f 02, Mithsu Resindency, Jofilnagar, Ponda, Ponda, Goa, Fl No-f 02, Goa 403401",
 	"labelercode":"8532",
-	"multichainaddress":"1GvLczuVCVjaN78gB7BESF6rA5P7UhcvroQhK6",
+	"multichainaddress":"1NfiZvhxrNT9ouFA8XjLx2e5w9RwB1hGxbBwNV",
 	"keyspath":"./keystore/manfkeystore/credentials.pem",
-	"ip":"169.254.216.151",
+	"ip":"10.51.233.255",
 	"port":"8999",
 	"user":"multichainrpc",
-	"pass":"3sALXzUAct65Mv2CxfKrDZgUDJ4GhJWootWzshKsM41A"
+	"pass":"dhSk75VEi1zMhde6JQ7w1tBUC43eije8AiFJ8Uot729"
 
 
 },{
 	"name":"Orient Pharmaceutical Distributor",
 	"address":"1-2,Orient Tower,Behind Loyala High School, Margao, Goa, 403601",
 	"labelercode":"7843",
-	"multichainaddress":"12syYEdrRa1WQFhQJdnCSHrJt8a8jChiMfzRCs",
+	"multichainaddress":"1GdGhb7MESLJGiNB55gBfPW9XtQ5PBRao26LfV",
 	"keyspath":"./keystore/distkeystore/credentials.pem",
-	"ip":"169.254.216.151",
+	"ip":"10.51.233.255",
 	"port":"7999",
 	"user":"multichainrpc",
-	"pass":"Aj2FmLFTMASMorTo3QHQnsZHkojXS2qb4iGps3tzhUdx"
+	"pass":"F37Pn29yzxwHN14WVuSEZzSSvubrkP4QG8sKoDLtnrS3"
 
 },{
 
 	"name":"Farmacia Salcette",
 	"address":"Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
 	"labelercode":"5876",
-	"multichainaddress":"16CzWSBPHV3gpdpRUEdX7uCUEPw9zaeK2616ve",
+	"multichainaddress":"1LAzcDvWACZtQaKnaqtadnVr91fkhfbwkLsMko",
 	"keyspath":"./keystore/pharmkeystore/credentials.pem",
-	"ip":"169.254.216.151",
+	"ip":"10.51.233.255",
 	"port":"6999",
 	"user":"multichainrpc",
-	"pass":"HjafPtYCbspLSGd7KJ8XPqZ3G74niDiDkpyX7r9E1zLJ"
+	"pass":"2w6MTUozFWR4pazKfcU32ELYq5X4o1kmDgEMJdZKBTtQ"
 
 }]
