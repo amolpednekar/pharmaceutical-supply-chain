@@ -1,5 +1,5 @@
 const parser = require('json-parser');
-
+const notifications = require('./notifications')
 console.log("Listener Triggered!");
 
 args = process.argv.slice(2);
@@ -25,6 +25,7 @@ args = process.argv.slice(2);
 		//console.log("\n\nextractedStringJson",extractedStringJson);
 
 		if(extractedStringJson.name == "recalleddrugstrades"){
+			to = "blockchaingoa@persistent.co.in";
 			buf = new Buffer(extractedStringJson.data, "hex");
 			//console.log("\n\nAscii", buf.toString('ascii'));
 			drugTradeobj = JSON.parse(buf.toString('ascii'));
@@ -33,6 +34,11 @@ args = process.argv.slice(2);
 			numberOfUnits = drugTradeobj.drugtrade.unitsid.length;
 			for(i=0;i<numberOfUnits;i++){
 				console.log(lotNumber+"-"+drugTradeobj.drugtrade.unitsid[i]+" has been revoked!");
+				msg = lotNumber+"-"+drugTradeobj.drugtrade.unitsid[i]+" has been recalled!"
+				
+				if(process.env.emailEnabled){	// flag to enable/disable emails
+					notifications.sendEmail(to,msg);	//send email for every lot!
+				}
 			}
 		}
 

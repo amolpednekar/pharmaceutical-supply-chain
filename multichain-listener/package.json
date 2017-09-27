@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "json-parser": "^1.1.5"
+    "json-parser": "^1.1.5",
+    "nodemailer": "^4.1.1"
   }
 }
