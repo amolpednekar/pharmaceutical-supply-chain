@@ -573,6 +573,7 @@ exports.recallDrugVerify = function (req, response) {
 
 	var lotnumber = req.params.lot;
 	var caller = participants[req.params.callerid];
+	var signatureVerify = participants[1];	// 0 for FDA
 	console.log("caller",caller);
 	var multichain = require("multichain-node")({
 		port: caller.port,
@@ -597,7 +598,7 @@ exports.recallDrugVerify = function (req, response) {
 				drugTradeobj = JSON.parse(buf.toString('ascii'));
 
 				// Signature Verification
-				multichainaddress = caller.multichainaddress;
+				multichainaddress = signatureVerify.multichainaddress;
 				
 				// hashing the drugtrade object
 				var hash = new keccak()
@@ -606,13 +607,10 @@ exports.recallDrugVerify = function (req, response) {
 				signature = drugTradeobj.signature;
 				multichain.listStreamPublisherItems({ stream: 'pubkeys', address: multichainaddress, verbose: true }, (err, items) => {
 					if (err) {
-
 						console.log(err)
 						response.send({ success: 0, data: err });
-
 					} else {
 						var publickeyHex = items[items.length - 1].data;
-						//console.log("Publickey (Hex)" + multichainaddress + " " + labelercode + " " + i + " : ", publickeyHex);
 						var publicKey = new Buffer(publickeyHex, 'hex').toString('ascii')
 						var public_key = new NodeRSA();
 						public_key.importKey(publicKey, 'pkcs8-public-pem');

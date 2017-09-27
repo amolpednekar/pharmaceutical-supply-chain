@@ -1,14 +1,13 @@
 myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http','ionicToast', function ($scope, $stateParams, $http, ionicToast) {
   console.log($stateParams);
 
-  $http.get("http://10.51.233.255:8080/drug/" + $stateParams.shipmentId + "/1/verify")
+  $http.get(backendUrl+"/drug/" + $stateParams.shipmentId + "/1/verify")
     .success(function (response) {
-      console.log(response);
+      console.log("Drug get Success!",response);
       $scope.tradeDetails = response.data.tradedetails;
       $scope.verificationStatus = response.data.verificationstatus;
       $scope.drugTrade = response.data.tradedetails.drugtrade;
       $scope.tradeFlow = response.data.tradedetails.tradeflow;
-
       $('#verifyResults').show();
       if ($scope.tradeFlow.length == 1 || $scope.tradeFlow.length == 4) {
         // Do nothing
@@ -26,17 +25,13 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http','ion
     post_data = {};
     post_data.senderId = 1;
     post_data.tradeDetails = $scope.tradeDetails;
-
-    $http.put("http://10.51.233.255:8080/drugrecall", post_data).then(function (response) {
-      // This function handles success
-      ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);
-      console.log(response);
-      // $scope.DistributorSearch($scope.tradeDetails.drugtrade.lotnumber);
+    console.log("post_data",post_data);
+    $http.post(backendUrl+"/drugrecall/", post_data).then(function (response) {
+      ionicToast.show('Lot # revoked succesfully!', 'bottom', false, 5000);
+      console.log("Revocation Success", response);
     }, function (response) {
-      // this function handles error
-      console.log("Failure!");
+      console.log("Revocation Failure", response);
       ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
-      console.log(response);
     });
   }
 

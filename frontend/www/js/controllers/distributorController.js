@@ -1,7 +1,7 @@
 angular.module('app.controllers', [])
   .controller('distributorCtrl', ['$scope', '$http', 'ionicToast',
     function ($scope, $http, ionicToast) {
-
+      console.log("backendUrl",backendUrl);
       $scope.pharmacies = [{
         "name": "Farmacia Salcette",
         "address": "Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
@@ -37,7 +37,7 @@ angular.module('app.controllers', [])
 
         console.log(data);
 
-        $http.get("http://10.51.233.255:8080/drug/" + data.lot + "/2/verify")
+        $http.get(backendUrl + "/drug/" + data.lot + "/2/verify")
           .success(function (response) {
             console.log(response);
             $scope.tradeDetails = response.data.tradedetails;
@@ -59,6 +59,30 @@ angular.module('app.controllers', [])
             console.log(err);
             ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
           });
+
+          // Check revocation
+          // $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
+          // .success(function (response) {
+          //   console.log(response);
+          //   $scope.tradeDetails = response.data.tradedetails;
+          //   console.log(response.data.verificationstatus)
+          //   $scope.verificationStatus = response.data.verificationstatus;
+          //   console.log($scope.verificationStatus)
+          //   $scope.drugTrade = response.data.tradedetails.drugtrade;
+          //   $scope.tradeFlow = response.data.tradedetails.tradeflow;
+
+          //   $('#verifyResults').show();
+          //   if ($scope.tradeFlow.length >= 2 && $scope.tradeFlow[0].recipientlabelercode === $scope.tradeFlow[2].senderlabelercode) {
+          //     // Do nothing
+          //   } else {
+          //     $('#distributorForm2').show();
+          //     $('#distributor-send').show();
+          //   }
+
+          // }).catch(function (err) {
+          //   console.log(err);
+          //   ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
+          // });
       }
 
       $scope.DistributorSend = function (data) {
@@ -67,16 +91,15 @@ angular.module('app.controllers', [])
         post_data.pharamacyId = 3;
         post_data.tradeDetails = $scope.tradeDetails;
 
-        $http.put("http://10.51.233.255:8080/drugtrade", post_data).then(function (response) {
+        $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
           // This function handles success
-          ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);
-          console.log(response);
+          ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
+          console.log("Success",response);
           // $scope.DistributorSearch($scope.tradeDetails.drugtrade.lotnumber);
         }, function (response) {
           // this function handles error
-          console.log("Failure!");
-          ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
-          console.log(response);
+          ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
+          console.log("Failure",response);
         });
 
       };

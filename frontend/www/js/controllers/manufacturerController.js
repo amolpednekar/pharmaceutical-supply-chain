@@ -124,10 +124,10 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       post_data.receiverInfo = 2;
       console.log(post_data);
 
-      $http.post("http://10.51.233.255:8080/drugtrade", post_data)
+      $http.post(backendUrl + "/drugtrade", post_data)
         .success(function (response) {
           console.log(response);
-          ionicToast.show('Data Submitted Successfully!', 'bottom', false, 5000);
+          ionicToast.show('Manufacturer Send Successful!!', 'bottom', false, 5000);
           // Store response data in browser's local storage
           allTrades.push(response.data);
           localStorage.setItem('trades', JSON.stringify(allTrades));
@@ -136,7 +136,7 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
         }).catch(function (err) {
           console.log("Failed");
-          ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
+          ionicToast.show('Manufacturer Send Failed!', 'bottom', false, 5000);
           console.log(err);
         });
     }

@@ -9,6 +9,6 @@ module.exports = function (app) {
     app.post('/drugtrade', bcManager.drugTrade);
 	app.get('/drug/:lot/:callerid/verify',bcManager.drugVerify);
 	app.put('/drugtrade', bcManager.updatedrugTrade);
-	app.put('/drugrecall',bcManager.recallDrug);
+	app.post('/drugrecall',bcManager.recallDrug);
 	app.get('/drugrecall/:lot/:callerid/verify',bcManager.recallDrugVerify);
 };

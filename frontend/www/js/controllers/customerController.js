@@ -2,24 +2,12 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
   function ($scope, $http, ionicToast) {
     $scope.data = {};
 
-    // QR Scanner Test
-    // $scope.onSuccess = function (data) {
-    //   console.log(data);
-    //   $scope.data.mid = data;
-    // };
-    // $scope.onError = function (error) {
-    //   console.log(error);
-    // };
-    // $scope.onVideoError = function (error) {
-    //   console.log(error);
-    // };
-
     $scope.CustomerSearch = function (data) {
 
       result = data.mid.split('-');
       console.log(result[1]);
 
-      $http.get("http://10.51.233.255:8080/drug/" + result[0] + "/3/verify")
+      $http.get(backendUrl + "/drug/" + result[0] + "/3/verify")
         .success(function (response) {
           console.log(response);
           $scope.tradeDetails = response.data.tradedetails;
