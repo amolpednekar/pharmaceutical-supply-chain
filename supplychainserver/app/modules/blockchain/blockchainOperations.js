@@ -574,7 +574,7 @@ exports.recallDrugVerify = function (req, response) {
 	var lotnumber = req.params.lot;
 	var caller = participants[req.params.callerid];
 	var signatureVerify = participants[1];	// 0 for FDA
-	console.log("caller",caller);
+	console.log("caller", caller);
 	var multichain = require("multichain-node")({
 		port: caller.port,
 		host: "127.0.0.1",
@@ -589,36 +589,40 @@ exports.recallDrugVerify = function (req, response) {
 		}
 		else {
 			multichain.listStreamKeyItems({ stream: 'recalleddrugstrades', key: lotnumber.toString(), verbose: true }, (err, drugtrades) => {
+				if (drugtrades.length < 1) {
+					response.status(404)
+					response.send({ success: 0, data: "Invalid lot number" });
+				} else {
+					var hexdrugtrade = drugtrades[drugtrades.length - 1].data;
+					console.log("Drug trade(Hex): ", hexdrugtrade);
+					buf = new Buffer(hexdrugtrade, "hex");
+					console.log(buf);
+					console.log("\n\nAscii", buf.toString('ascii'));
+					drugTradeobj = JSON.parse(buf.toString('ascii'));
 
-				var hexdrugtrade = drugtrades[drugtrades.length - 1].data;
-				console.log("Drug trade(Hex): ", hexdrugtrade);
-				buf = new Buffer(hexdrugtrade, "hex");
-				console.log(buf);
-				console.log("\n\nAscii", buf.toString('ascii'));
-				drugTradeobj = JSON.parse(buf.toString('ascii'));
+					// Signature Verification
+					multichainaddress = signatureVerify.multichainaddress;
 
-				// Signature Verification
-				multichainaddress = signatureVerify.multichainaddress;
-				
-				// hashing the drugtrade object
-				var hash = new keccak()
-				hash.update(JSON.stringify(drugTradeobj.drugtrade));
-				var drug_trade_hash = hash.digest('hex')
-				signature = drugTradeobj.signature;
-				multichain.listStreamPublisherItems({ stream: 'pubkeys', address: multichainaddress, verbose: true }, (err, items) => {
-					if (err) {
-						console.log(err)
-						response.send({ success: 0, data: err });
-					} else {
-						var publickeyHex = items[items.length - 1].data;
-						var publicKey = new Buffer(publickeyHex, 'hex').toString('ascii')
-						var public_key = new NodeRSA();
-						public_key.importKey(publicKey, 'pkcs8-public-pem');
-						var signcheck = public_key.verify(drug_trade_hash, signature, "utf8", "base64");
-						console.log("Signature Status: ", signcheck)
-						response.send({ success: 1, data: { tradedetails: drugTradeobj, verificationstatus: true } });
-					}
-				});
+					// hashing the drugtrade object
+					var hash = new keccak()
+					hash.update(JSON.stringify(drugTradeobj.drugtrade));
+					var drug_trade_hash = hash.digest('hex')
+					signature = drugTradeobj.signature;
+					multichain.listStreamPublisherItems({ stream: 'pubkeys', address: multichainaddress, verbose: true }, (err, items) => {
+						if (err) {
+							console.log(err)
+							response.send({ success: 0, data: err });
+						} else {
+							var publickeyHex = items[items.length - 1].data;
+							var publicKey = new Buffer(publickeyHex, 'hex').toString('ascii')
+							var public_key = new NodeRSA();
+							public_key.importKey(publicKey, 'pkcs8-public-pem');
+							var signcheck = public_key.verify(drug_trade_hash, signature, "utf8", "base64");
+							console.log("Signature Status: ", signcheck)
+							response.send({ success: 1, data: { tradedetails: drugTradeobj, verificationstatus: true } });
+						}
+					});
+				}
 			});
 		}
 	});
