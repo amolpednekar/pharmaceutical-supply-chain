@@ -1,7 +1,6 @@
 myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast',
   function ($scope, $http, ionicToast) {
-    $scope.greeting = 'Hola!';
-
+    $scope.recallFlag = 0;
     $scope.PharmacySearch = function (data) {
 
       console.log(data);
@@ -23,6 +22,16 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast',
         }).catch(function (err) {
           console.log(err);
           ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
+        });
+
+        $http.get(backendUrl + "/drugrecall/" + data.lot + "/3/verify")
+        .success(function (response) {
+          console.log("Drug get Success!", response);
+          $scope.recallFlag = 1;
+        }).catch(function (err) {
+          console.log(err);
+          $scope.recallFlag = 0;
+          //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
         });
     }
 

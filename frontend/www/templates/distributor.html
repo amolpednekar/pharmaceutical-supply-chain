@@ -47,7 +47,7 @@
             <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
             <p>Quantity - {{drugTrade.quantity}}</p>
             <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
-            <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{drugTrade.lotnumber}}-{{unit}} &nbsp</span></p>
+            <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{drugTrade.lotnumber}}-{{unit}} |  &nbsp</span></p>
           </div>
         </div>
 
@@ -78,9 +78,23 @@
           </div>
         </div>
 
+        <div class="card">
+          <div class="item item-divider">
+              Medicine Status
+          </div>
+          <div class="item item-text-wrap" ng-hide="recallFlag">
+              <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
+          </div>
+          <div class="item item-text-wrap" ng-show="recallFlag">
+              <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
+          </div>
+        </div>
+  
+
       </div>
 
-      <form name="distributorForm2" id="distributorForm2" class="form item" style="display:none" ng-submit="DistributorSend(data)">
+
+      <form name="distributorForm2" id="distributorForm2" class="form item" style="display:none" ng-submit="DistributorSend(data)" ng-hide="recallFlag">
         <span class="input-label">Select Pharmacy</span>
 
         <div class="item item-input item-select">

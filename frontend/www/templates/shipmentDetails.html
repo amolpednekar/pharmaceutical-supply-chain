@@ -68,7 +68,19 @@
                     </div>
                 </div>
 
-                <button id="create-deal" class="button button-medium button-radius button-balanced button-block" ng-click="RecallDrug()">
+                <div class="card">
+                    <div class="item item-divider">
+                        Medicine Status
+                    </div>
+                    <div class="item item-text-wrap" ng-hide="recallFlag">
+                        <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
+                    </div>
+                    <div class="item item-text-wrap" ng-show="recallFlag">
+                        <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
+                    </div>
+                </div>
+
+                <button id="create-deal" class="button button-medium button-radius button-balanced button-block" ng-hide="recallFlag" ng-click="RecallDrug()">
                     <label>Recall<label>
                 </button>
 

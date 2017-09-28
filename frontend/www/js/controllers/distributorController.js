@@ -1,7 +1,9 @@
 angular.module('app.controllers', [])
   .controller('distributorCtrl', ['$scope', '$http', 'ionicToast',
     function ($scope, $http, ionicToast) {
-      console.log("backendUrl",backendUrl);
+
+      $scope.recallFlag = 0;
+
       $scope.pharmacies = [{
         "name": "Farmacia Salcette",
         "address": "Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
@@ -59,30 +61,16 @@ angular.module('app.controllers', [])
             console.log(err);
             ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
           });
-
-          // Check revocation
-          // $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
-          // .success(function (response) {
-          //   console.log(response);
-          //   $scope.tradeDetails = response.data.tradedetails;
-          //   console.log(response.data.verificationstatus)
-          //   $scope.verificationStatus = response.data.verificationstatus;
-          //   console.log($scope.verificationStatus)
-          //   $scope.drugTrade = response.data.tradedetails.drugtrade;
-          //   $scope.tradeFlow = response.data.tradedetails.tradeflow;
-
-          //   $('#verifyResults').show();
-          //   if ($scope.tradeFlow.length >= 2 && $scope.tradeFlow[0].recipientlabelercode === $scope.tradeFlow[2].senderlabelercode) {
-          //     // Do nothing
-          //   } else {
-          //     $('#distributorForm2').show();
-          //     $('#distributor-send').show();
-          //   }
-
-          // }).catch(function (err) {
-          //   console.log(err);
-          //   ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
-          // });
+          
+        $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
+          .success(function (response) {
+            console.log("drugrecall get Success!", response);
+            $scope.recallFlag = 1;
+          }).catch(function (err) {
+            console.log(err);
+            $scope.recallFlag = 0;
+            //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
+          });
       }
 
       $scope.DistributorSend = function (data) {
@@ -94,12 +82,12 @@ angular.module('app.controllers', [])
         $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
           // This function handles success
           ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
-          console.log("Success",response);
+          console.log("Success", response);
           // $scope.DistributorSearch($scope.tradeDetails.drugtrade.lotnumber);
         }, function (response) {
           // this function handles error
           ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
-          console.log("Failure",response);
+          console.log("Failure", response);
         });
 
       };

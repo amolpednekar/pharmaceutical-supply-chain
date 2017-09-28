@@ -32,10 +32,10 @@ args = process.argv.slice(2);
 			//console.log("\n\nParsedJson", drugTradeobj);
 			lotNumber = drugTradeobj.drugtrade.lotnumber;
 			numberOfUnits = drugTradeobj.drugtrade.unitsid.length;
+			console.log(process.env.emailEnabled);
 			for(i=0;i<numberOfUnits;i++){
 				console.log(lotNumber+"-"+drugTradeobj.drugtrade.unitsid[i]+" has been revoked!");
 				msg = lotNumber+"-"+drugTradeobj.drugtrade.unitsid[i]+" has been recalled!"
-				
 				if(process.env.emailEnabled){	// flag to enable/disable emails
 					notifications.sendEmail(to,msg);	//send email for every lot!
 				}
