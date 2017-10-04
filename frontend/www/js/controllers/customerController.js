@@ -30,7 +30,7 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
         });
 
 
-      $http.get(backendUrl + "/drugrecall/" + data.lot + "/3/verify")
+      $http.get(backendUrl + "/drugrecall/" + result[0] + "/3/verify")
         .success(function (response) {
           console.log("Drug get Success!", response);
           $scope.recallFlag = 1;

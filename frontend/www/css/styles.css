@@ -5,7 +5,7 @@
   user-select: text;
 }
 .background{
-  background: url(../img/background.jpg) no-repeat center;
+  background: url(../img/background-white.jpg) no-repeat center;
   background-size:cover;
 }
 .marginTop{
