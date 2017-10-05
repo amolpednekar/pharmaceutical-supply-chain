@@ -137,7 +137,7 @@ exports.drugTrade = function (req, response) {
 
 											} else {
 
-												response.send({ success: 1, data: { drugstradetxid: drugstradetx, symkeytxid: symkeytx, lotnumber: req.body.lotNumber, recipientname: to.name } });
+												response.send({ success: 1, data: { drugstradetxid: drugstradetx, symkeytxid: symkeytx, lotnumber: req.body.lotNumber, recipientname: to.name, datetime: currentdate.toString()} });
 											}
 
 										});
