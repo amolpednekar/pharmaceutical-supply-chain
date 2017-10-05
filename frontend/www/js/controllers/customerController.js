@@ -2,7 +2,6 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
   function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.data = {};
 
-    //$scope.recallFlag = 0;
     $scope.ToggleUnitFlag = function(){
       $('#showMoreText').hide();
       $('#showMore').show();
@@ -42,7 +41,6 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
         }).catch(function (err) {
           console.log(err);
           $scope.recallFlag = 0;
-          //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
         });
     }
 

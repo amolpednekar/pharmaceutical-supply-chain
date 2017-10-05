@@ -26,7 +26,6 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
       }).catch(function (err) {
         console.log(err);
         $scope.recallFlag = 0;
-        //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
       });
 
     // Timeline view logic

@@ -68,10 +68,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
     }];
 
-    // $http.get('productdetails.json').then(function (data) {
-    //   $scope.phones = data;
-    //   console.log("success")
-    // });
     allTrades = [];
 
     if (localStorage.getItem('trades') !== null) {
@@ -114,12 +110,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
     });
 
-    //console.log("Local" +localStorage.getItem('trades'));
-    // if (localStorage.getItem('trades') !== null) {
-    //   obj = localStorage.getItem('trades');
-    //   console.log(JSON.parse(obj));
-    // }
-
     // On Submit of Manufacturer's Form
     $scope.ManufacturerForm = function (data) {
       var post_data = {};
@@ -133,7 +123,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       post_data.expirationDate = $scope.expirationDate;
       post_data.quantity = data.quantity;
       post_data.productInfo = $scope.productInfo;
-      //post_data.receiverInfo = $scope.receiverInfo;
       post_data.receiverInfo = 2;
       console.log(post_data);
 

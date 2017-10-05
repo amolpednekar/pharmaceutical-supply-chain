@@ -88,12 +88,9 @@ angular.module('app.controllers', [])
         post_data.tradeDetails = $scope.tradeDetails;
 
         $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-          // This function handles success
           ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
           console.log("Success", response);
-          // $scope.DistributorSearch($scope.tradeDetails.drugtrade.lotnumber);
         }, function (response) {
-          // this function handles error
           ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
           console.log("Failure", response);
         });
