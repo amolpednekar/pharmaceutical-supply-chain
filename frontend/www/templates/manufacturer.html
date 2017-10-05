@@ -25,12 +25,13 @@
     <div class="screenadjust">
 
       <h1 style="text-align:center">Manufacturer Portal</h1>
-      <form name="manufacturerForm" class="form item" ng-submit="ManufacturerForm(data)">
+
+      <form name="manufacturerForm" class="form item">
         <span class="input-label">Manufacturer Name</span>
         <div class="item item-input">
           <input type="text" name="name" placeholder="Enter Manufacturer Name" ng-model="manufacturer.name" disabled>
         </div>
-        <span class="input-label">Lot Number</span>
+        <label class="input-label">Lot Number</label>
         <div class="item item-input">
           <input type="text" name="lot" placeholder="Enter LOT# (Not Required)" ng-model="lot" disabled>
         </div>
@@ -39,9 +40,11 @@
           <input type="text" name="name" placeholder="Enter NDC# (Not Required)" ng-model="ndc" disabled>
         </div>
         <span class="input-label">Drug Expiration Date</span>
-        <div class="item item-input">
-          <input type="date" name="date" placeholder="Select lot expiration date" ng-model="expirationDate">
-        </div>
+        <onezone-datepicker datepicker-object="onezoneDatepicker">
+            <button class="button button-block button-outline button-positive show-onezone-datepicker">
+                {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
+            </button>
+        </onezone-datepicker>
         <span class="input-label">Quantity</span>
         <div class="item item-input">
           <input type="text" name="name" placeholder="Enter Quantity" ng-model="data.quantity">
@@ -82,15 +85,16 @@
               Receiver Details
             </div>
             <div class="item item-text-wrap">
-              Labeler Code - {{receiverInfo.labelercode}}<br> Multichain Address - {{receiverInfo.multichainaddress}}<br>              IP - {{receiverInfo.ip}}
+              Labeler Code - {{receiverInfo.labelercode}}<br> Multichain Address - {{receiverInfo.multichainaddress}}
             </div>
           </div>
 
         </div>
-
-        <button id="create-deal" class="button button-medium button-radius button-balanced button-block">
+        <div style="text-align:center">
+          <button id="create-deal" class="button button-medium button-radius button-balanced" ng-click="ManufacturerForm(data)">
           <label>Confirm<label>
         </button>
+        </div>
       </form>
     </div>
   </ion-content>

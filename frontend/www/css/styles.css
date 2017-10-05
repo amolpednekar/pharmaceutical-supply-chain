@@ -25,14 +25,13 @@
 @media screen and (min-width: 720px) {
 	.screenadjust{
 
-		width:1000px;
+		width:700px;
 		position: absolute;
 		left: 50%;
 		transform: translate(-50%, 0%);
 
 	}
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -64,6 +63,13 @@ h3{
   display:inline;
   text-decoration: underline;
 }
+
+.button{
+  width: 20%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 
 /* Hide up-down arrows for number fields - Firefox */
 input[type='number'] {

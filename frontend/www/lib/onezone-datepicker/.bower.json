@@ -1,0 +1,43 @@
+{
+  "name": "onezone-datepicker",
+  "authors": [
+    "Sergiu Butnarasu, https://www.sergiubutnarasu.onezone.ro"
+  ],
+  "description": "Onezone Datepicker - A datepicker for Ionic Framework",
+  "main": [
+    "./dist/onezone-datepicker.min.js"
+  ],
+  "keywords": [
+    "onezone-datepicker",
+    "ionic",
+    "datepicker",
+    "datepicker for ionic",
+    "datepicker for ionic framework"
+  ],
+  "license": "MIT",
+  "homepage": "http://onezone.ro/datepicker/",
+  "ignore": [
+    "node_modules",
+    "publish",
+    "src",
+    ".gitignore",
+    "bower.json",
+    "gulpfile.js",
+    "licence.txt",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "ionic": ">=1.0.0"
+  },
+  "_release": "41baa64feb",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "41baa64feb916f978330ea427de17d2eb7c231d0"
+  },
+  "_source": "https://sergiu_butnarasu@bitbucket.org/sergiu_butnarasu/onezonedatepicker.git",
+  "_target": "*",
+  "_originalSource": "onezone-datepicker",
+  "_direct": true
+}

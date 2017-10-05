@@ -1,5 +1,21 @@
 myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
   function ($scope, $http, $state,ionicToast) {
+
+      $scope.onezoneDatepicker = {
+        date: new Date(), // MANDATORY
+        mondayFirst: false,
+        disablePastDays: true,
+        disableSwipe: false,
+        disableWeekend: false,
+        showDatepicker: false,
+        showTodayButton: true,
+        calendarMode: false,
+        hideCancelButton: false,
+        hideSetButton: false,
+        callback: function(value){
+            $scope.expirationDate = value;
+        }
+      };
     $scope.manufacturer = {
       "name": "Merck Pharmaceutical",
       "address": "Fl No-f 02, Mithsu Resindency, Jofilnagar, Ponda, Ponda, Goa, Fl No-f 02, Goa 403401",
@@ -69,7 +85,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
       $scope.ndc = Math.round((Math.random() * 100000) * 100000);
       $scope.lot = Math.round((Math.random() * 10000) * 10000);
-      $scope.expirationDate = new Date();
       $('#productid').change(function () {
         selected = $('option:selected', this).attr('value');
         for (var i = 0; i < $scope.products.length; i++) {
@@ -107,8 +122,6 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
 
     // On Submit of Manufacturer's Form
     $scope.ManufacturerForm = function (data) {
-      $scope.expirationDateSub = new Date().getTime();
-      //console.log();
       var post_data = {};
       post_data.unitsId = [];
       for (i = 0; i < data.quantity; i++) {
@@ -117,7 +130,7 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       post_data.manufacturerID = 1; //postion in JSON, temp hardcode
       post_data.lotNumber = $scope.lot;
       post_data.ndc = $scope.ndc;
-      post_data.expirationDate = $scope.expirationDateSub;
+      post_data.expirationDate = $scope.expirationDate;
       post_data.quantity = data.quantity;
       post_data.productInfo = $scope.productInfo;
       //post_data.receiverInfo = $scope.receiverInfo;
