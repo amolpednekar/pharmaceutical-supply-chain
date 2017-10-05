@@ -25,13 +25,21 @@
 @media screen and (min-width: 720px) {
 	.screenadjust{
 
-		width:700px;
+		width:950px;
 		position: absolute;
 		left: 50%;
 		transform: translate(-50%, 0%);
 
-	}
+  }
+  .screenadjust-form{
+    width:700px;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 0%);
+
+  }
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -240,7 +248,7 @@ time {
 
 /* Tooltip container */
 .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }

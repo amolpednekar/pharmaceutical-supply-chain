@@ -35,9 +35,10 @@ angular.module('app.controllers', [])
 
       });
 
-      // $scope.$on("$ionicView.afterEnter", function () {
-      //   TimelineViewService.timeline($scope);
-      // });
+      $scope.ToggleUnitFlag = function(){
+        $('#showMoreText').hide();
+        $('#showMore').show();
+      }
 
       $scope.DistributorSearch = function (data) {
 

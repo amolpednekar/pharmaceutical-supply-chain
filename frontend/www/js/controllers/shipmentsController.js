@@ -7,7 +7,6 @@ function($scope,reverseAnythingFilter,ionicToast) {
     $scope.reversedTrades = [];
   }
 
-
   $scope.ClearStorage = function clearStorage(){
     localStorage.removeItem("trades");
     ionicToast.show('Local Storage cleared successfully!', 'bottom', false, 5000);

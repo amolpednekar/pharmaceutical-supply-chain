@@ -1,6 +1,12 @@
 myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast','TimelineViewService',
   function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.recallFlag = 0;
+
+    $scope.ToggleUnitFlag = function(){
+      $('#showMoreText').hide();
+      $('#showMore').show();
+    }
+
     $scope.PharmacySearch = function (data) {
 
       console.log(data);

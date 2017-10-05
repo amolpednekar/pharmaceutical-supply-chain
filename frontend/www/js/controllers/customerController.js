@@ -3,6 +3,10 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
     $scope.data = {};
 
     //$scope.recallFlag = 0;
+    $scope.ToggleUnitFlag = function(){
+      $('#showMoreText').hide();
+      $('#showMore').show();
+    }
 
     $scope.CustomerSearch = function (data) {
 
