@@ -1,27 +1,27 @@
 //mycontrollerModule = angular.module('app.controllers', ['ionic']);
 
-myApp = angular.module('app', ['ionic','app.controllers','ionic-toast','qrScanner']);
+myApp = angular.module('app', ['ionic', 'app.controllers', 'ionic-toast', 'qrScanner']);
 
-myApp.run(function ($ionicPlatform,$rootScope) {
-    $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs).
-      // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
-      // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
-      // useful especially with forms, though we would prefer giving the user a little more room
-      // to interact with the app.
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        cordova.plugins.Keyboard.disableScroll(true);
-      }
-      if (window.StatusBar) {
-        // Set the statusbar to use the default style, tweak this to
-        // remove the status bar on iOS or change it to use white instead of dark colors.
-        StatusBar.styleDefault();
-      }
+myApp.run(function ($ionicPlatform, $rootScope) {
+  $ionicPlatform.ready(function () {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs).
+    // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
+    // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
+    // useful especially with forms, though we would prefer giving the user a little more room
+    // to interact with the app.
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+    }
+    if (window.StatusBar) {
+      // Set the statusbar to use the default style, tweak this to
+      // remove the status bar on iOS or change it to use white instead of dark colors.
+      StatusBar.styleDefault();
+    }
 
-    });
-  })
+  });
+})
   .config(function ($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -64,13 +64,17 @@ myApp.run(function ($ionicPlatform,$rootScope) {
         templateUrl: 'templates/shipments.html',
         controller: 'shipmentsCtrl',
         cache: false,
-      }).state('shipmentDetails',{
+      }).state('shipmentDetails', {
         url: '/shipments/:shipmentId',
         templateUrl: 'templates/shipmentDetails.html',
         controller: 'shipmentsDetailsCtrl',
         cache: false,
+      }).state('shipmentFlow', {
+        url: '/shipments/:shipmentId/shipmentflow',
+        templateUrl: 'templates/shipmentFlow.html',
+        controller: 'shipmentFlowCtrl',
+        cache: false
       });
 
-
-      $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/home');
   });

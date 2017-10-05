@@ -1,88 +1,97 @@
 <ion-view title="Distributor">
-    <ion-content overflow-scroll="true">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+  <ion-content overflow-scroll="true" on-scroll="scrollListener()">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-                    <a class="navbar-brand" href="#">Distribution Chain Manager</a>
+          <a class="navbar-brand" href="#">Distribution Chain Manager</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a ui-sref="manufacturer">Manufacturer</a></li>
+            <li><a ui-sref="shipments">Shipments</a></li>
+            <li><a ui-sref="distributor">Distributor</a></li>
+            <li><a ui-sref="pharmacy">Pharmacy</a></li>
+            <li><a ui-sref="customer">Customer</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="screenadjust" style="text-align:center">
+
+      <div id="verifyResults" style="margin-top:25px;display:none;">
+
+        <div class="card">
+          <div class="item item-text-wrap cardFormatting">
+            <p>Lot Number - {{drugTrade.lotnumber}}</p>
+            <p>NDC - {{drugTrade.nationaldrugcode}}</p>
+            <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
+            <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
+            <p>Quantity - {{drugTrade.quantity}}</p>
+            <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+            <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{drugTrade.lotnumber}}-{{unit}} &nbsp</span></p>
+          </div>
+        </div>
+
+        <hr>
+
+
+        <div class="card">
+          <div class="item item-divider">
+              <a href="#shipments/{{drugTrade.lotnumber}}/shipmentflow">Distribution Flow</a>
+          </div>
+        </div>
+
+
+
+        <section class="timeline">
+            <ul>
+              <li ng-repeat="trade in tradeFlow">
+                <div>
+                  <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+                  <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+                  <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+                  <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+                  <p class="whitetext" > Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                  <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+                  <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
                 </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a ui-sref="manufacturer">Manufacturer</a></li>
-                        <li><a ui-sref="shipments">Shipments</a></li>
-                        <li><a ui-sref="distributor">Distributor</a></li>
-                        <li><a ui-sref="pharmacy">Pharmacy</a></li>
-                        <li><a ui-sref="customer">Customer</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="screenadjust" style="text-align:center">
+              </li>
+            </ul>
+          </section>
 
-            <div id="verifyResults" style="margin-top:25px;display:none;">
+        <div class="card">
+          <div class="item item-divider">
+            Verification Status
+          </div>
+          <div class="item item-text-wrap">
+            <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
+          </div>
+        </div>
 
-                <div class="card">
-                    <div class="item item-divider">
-                        Search Result
-                    </div>
-                    <div class="item item-text-wrap cardFormatting">
-                        <p>Lot Number - {{drugTrade.lotnumber}}</p>
-                        <p>NDC - {{drugTrade.nationaldrugcode}}</p>
-                        <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
-                        <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
-                        <p>Quantity - {{drugTrade.quantity}}</p>
-                        <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
-                        <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{drugTrade.lotnumber}}-{{unit}} &nbsp</span></p>
-                    </div>
-                </div>
+        <div class="card">
+          <div class="item item-divider">
+            Medicine Status
+          </div>
+          <div class="item item-text-wrap" ng-hide="recallFlag">
+            <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
+          </div>
+          <div class="item item-text-wrap" ng-show="recallFlag">
+            <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
+          </div>
+        </div>
 
-                <hr>
-
-                <div class="card">
-                    <div class="item item-divider">
-                        Distribution Flow
-                    </div>
-                    <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
-                        <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-                        <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-                        <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-                        <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-                        <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
-                        <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-                        <p ng-if="trade.recipientsignature">Sender Signature - {{trade.recipientsignature}}</p>
-                    </div>
-                </div>
-
-
-                <div class="card">
-                    <div class="item item-divider">
-                        Verification Status
-                    </div>
-                    <div class="item item-text-wrap">
-                        <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="item item-divider">
-                        Medicine Status
-                    </div>
-                    <div class="item item-text-wrap" ng-hide="recallFlag">
-                        <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
-                    </div>
-                    <div class="item item-text-wrap" ng-show="recallFlag">
-                        <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
-                    </div>
-                </div>
-
-                <button id="create-deal" class="button button-medium button-radius button-balanced button-block" ng-hide="recallFlag" ng-click="RecallDrug()">
+        <button id="create-deal" class="button button-medium button-radius button-balanced button-block" ng-hide="recallFlag" ng-click="RecallDrug()">
                     <label>Recall<label>
                 </button>
 
-            </div>
-        </div>
+      </div>
+    </div>
+    </ion-content>
+    </ion-view>
+

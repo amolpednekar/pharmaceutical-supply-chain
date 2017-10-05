@@ -1,5 +1,5 @@
-myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast',
-  function ($scope, $http, ionicToast) {
+myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast','TimelineViewService',
+  function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.recallFlag = 0;
     $scope.PharmacySearch = function (data) {
 
@@ -19,6 +19,7 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast',
           } else {
             $('#pharmacyForm2').show();
           }
+          setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
         }).catch(function (err) {
           console.log(err);
           ionicToast.show('Data Not Found! ', 'bottom', false, 5000);

@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast',
-    function ($scope, $http, ionicToast) {
+  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService',
+    function ($scope, $http, ionicToast, TimelineViewService) {
 
       $scope.recallFlag = 0;
 
@@ -35,6 +35,10 @@ angular.module('app.controllers', [])
 
       });
 
+      // $scope.$on("$ionicView.afterEnter", function () {
+      //   TimelineViewService.timeline($scope);
+      // });
+
       $scope.DistributorSearch = function (data) {
 
         console.log(data);
@@ -56,12 +60,12 @@ angular.module('app.controllers', [])
               $('#distributorForm2').show();
               $('#distributor-send').show();
             }
-
+            setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
           }).catch(function (err) {
             console.log(err);
             ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
           });
-          
+
         $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
           .success(function (response) {
             console.log("drugrecall get Success!", response);
@@ -72,7 +76,10 @@ angular.module('app.controllers', [])
             //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
           });
       }
+      // Timeline view logic
+      $scope.$on("$ionicView.afterEnter", function () {
 
+      });
       $scope.DistributorSend = function (data) {
         post_data = {};
         post_data.senderId = 2;

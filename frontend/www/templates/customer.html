@@ -1,5 +1,5 @@
 <ion-view title="Customer">
-  <ion-content overflow-scroll="true">
+  <ion-content overflow-scroll="true" on-scroll="scrollListener()">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -35,20 +35,40 @@
       </form>
       <!--<qr-scanner ng-success="onSuccess(data)" ng-error="onError(error)" width="400" height="300"></qr>-->
       <div id="searchResults" style="margin-top:25px;display:none;">
+          <div class="card">
+              <div class="item item-divider">
+                Search Result
+              </div>
+              <div class="item item-text-wrap cardFormatting">
+                <p>Lot Number - {{drugTrade.lotnumber}}</p>
+                <p>NDC - {{drugTrade.nationaldrugcode}}</p>
+                <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
+                <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
+                <p>Quantity - {{drugTrade.quantity}}</p>
+                <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+                <p>Units in lot: <span ng-repeat="unit in drugTrade.unitsid">{{drugTrade.lotnumber}}-{{unit}} |  &nbsp</span></p>
+              </div>
+            </div>
         <div class="card">
           <div class="item item-divider">
             <h3 class="font-bold">Medcine found - {{drugTrade.unitsid[0]}} </h3><br>
             <h3 class="font-bold" style="text-decoration:none">Distribution Flow </h3>
           </div>
-          <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
-            <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-            <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-            <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-            <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
-            <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-            <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
-          </div>
+          <section class="timeline">
+              <ul>
+                <li ng-repeat="trade in tradeFlow">
+                  <div>
+                    <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+                    <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+                    <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+                    <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+                    <p class="whitetext" > Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                    <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+                    <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
         </div>
 
 

@@ -27,12 +27,14 @@
       <table>
         <tr style="font-weight:bold">
           <th style="padding: 10px;">Lot Number</th>
+          <th style="padding: 10px;">Date_Time</th>
           <th style="padding: 10px;">Receipient Name</th>
           <th style="padding: 10px;">Transaction ID</th>
           <!--<th style="padding: 10px;">QR Code</th>-->
         </tr>
-        <tr ng-repeat="trade in trades track by $index">
+        <tr ng-repeat="trade in reversedTrades track by $index">
           <td style="padding: 10px;"><a href="#shipments/{{trade.lotnumber}}">{{trade.lotnumber}}</a></td>
+          <td style="padding: 10px;">{{trade.datetime | date:" dd MMM yyyy hh:mm:ss"}}</td>
           <td style="padding: 10px;">{{trade.recipientname}}</td>
           <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
           <!--<td style="padding: 10px;"><qr type-number="8" correction-level="'M'" size="200" input-mode="'ALPHA_NUM'" text="trade.lotnumber" image="true"></qr></td>-->

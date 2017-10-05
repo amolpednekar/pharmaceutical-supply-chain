@@ -1,9 +1,9 @@
-myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
-  function ($scope, $http, ionicToast) {
+myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService',
+  function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.data = {};
 
     //$scope.recallFlag = 0;
-    
+
     $scope.CustomerSearch = function (data) {
 
       result = data.mid.split('-');
@@ -24,6 +24,7 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast',
           } else {
             ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);
           }
+          setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
         }).catch(function (err) {
           console.log(err);
           ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);

@@ -1,5 +1,5 @@
 <ion-view title="Distributor">
-  <ion-content overflow-scroll="true">
+  <ion-content overflow-scroll="true" on-scroll="scrollListener()">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -57,15 +57,21 @@
           <div class="item item-divider">
             Distribution Flow
           </div>
-          <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
-            <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-            <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-            <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-            <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-            <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
-            <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-            <p ng-if="trade.recipientsignature">Sender Signature - {{trade.recipientsignature}}</p>
-          </div>
+          <section class="timeline">
+              <ul>
+                <li ng-repeat="trade in tradeFlow">
+                  <div>
+                    <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+                    <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+                    <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+                    <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+                    <p class="whitetext" > Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                    <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+                    <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
+                  </div>
+                </li>
+              </ul>
+            </section>
         </div>
 
 
@@ -89,7 +95,7 @@
               <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
           </div>
         </div>
-  
+
 
       </div>
 
