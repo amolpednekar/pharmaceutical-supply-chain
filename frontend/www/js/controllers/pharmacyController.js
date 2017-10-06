@@ -1,6 +1,13 @@
-myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService',
-  function ($scope, $http, ionicToast, TimelineViewService, HelperService) {
+myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService','reverseAnythingFilter',
+  function ($scope, $http, ionicToast, TimelineViewService, HelperService,reverseAnythingFilter) {
     $scope.recallFlag = 0;
+    $scope.trades = JSON.parse(localStorage.getItem('trades'));
+
+    if ($scope.trades != null) {
+      $scope.reversedTrades = reverseAnythingFilter($scope.trades); //reverse order to descending
+    } else {
+      $scope.reversedTrades = [];
+    }
 
     $scope.ToggleUnitFlag = function (arg) {
       HelperService.toggleShow(arg);

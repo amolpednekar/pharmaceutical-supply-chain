@@ -25,53 +25,50 @@
     <div class="screenadjust" style="text-align:center">
 
       <h1 style="text-align:center;margin-top: 10px;">Distributor Portal</h1>
-      <form name="distributorForm" class="form item" ng-submit="DistributorSearch(data)">
-        <div class="item item-input">
-          <input type="text" name="name" placeholder="Enter LOT #" ng-model="data.lot">
-          <button id="distributor-search" class="button button-small button-balanced"><i class="icon ion-search"></i>
-            <label>Search<label>
-          </button>
-        </div>
+      <form name="distributorForm" class="form item">
+        <select ng-model="data.lot" ng-change="DistributorSearch(data)">
+          <option ng-repeat="trade in reversedTrades" value="{{trade.lotnumber}}">{{trade.lotnumber}}</option>
+        </select>
       </form>
 
       <div id="verifyResults" style="margin-top:25px;display:none;">
 
-          <div class="card">
-              <div class="item item-text-wrap cardFormatting" style="float:left; width:70%">
-                <p>Lot Number - {{drugTrade.lotnumber}}</p>
-                <p>NDC - {{drugTrade.nationaldrugcode}}</p>
-                <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
-                <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
-                <p>Quantity - {{drugTrade.quantity}}</p>
-                <div ng-repeat="unit in drugTrade.unitsid"></div>
-                <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+        <div class="card">
+          <div class="item item-text-wrap cardFormatting" style="float:left; width:70%">
+            <p>Lot Number - {{drugTrade.lotnumber}}</p>
+            <p>NDC - {{drugTrade.nationaldrugcode}}</p>
+            <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
+            <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
+            <p>Quantity - {{drugTrade.quantity}}</p>
+            <div ng-repeat="unit in drugTrade.unitsid"></div>
+            <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
 
-                <p>Units in lot:
-                  <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index<2">{{drugTrade.lotnumber}}-{{unit}} | </span>
-                  <a id="showMoreText" ng-click="ToggleUnitFlag(1)">Show More</a>
-                  <span id="showMore" style="display:none" >
+            <p>Units in lot:
+              <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index<2">{{drugTrade.lotnumber}}-{{unit}} | </span>
+              <a id="showMoreText" ng-click="ToggleUnitFlag(1)">Show More</a>
+              <span id="showMore" style="display:none">
                       <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index>1">{{drugTrade.lotnumber}}-{{unit}} | </span>
-                  </span>
-                  <a id="showLessText" style="display:none" ng-click="ToggleUnitFlag(0)">Show Less</a>
-                </p>
+              </span>
+              <a id="showLessText" style="display:none" ng-click="ToggleUnitFlag(0)">Show Less</a>
+            </p>
 
-              </div>
-              <div style="float:right; width:30%">
-                  <br>
-                  <svg id="barcode"></svg>
-                  <div>
-                      <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
-                  </div>
-                  <br><br>
-
-                  <div ng-hide="recallFlag">
-                    <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
-                  </div>
-                  <div ng-show="recallFlag">
-                    <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
-                  </div>
-                </div>
+          </div>
+          <div style="float:right; width:30%">
+            <br>
+            <svg id="barcode"></svg>
+            <div>
+              <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
             </div>
+            <br><br>
+
+            <div ng-hide="recallFlag">
+              <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
+            </div>
+            <div ng-show="recallFlag">
+              <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
+            </div>
+          </div>
+        </div>
 
         <hr>
 
@@ -80,25 +77,26 @@
             Distribution Flow
           </div>
           <section class="timeline">
-              <ul>
-                <li ng-repeat="trade in tradeFlow">
-                  <div>
-                    <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-                    <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-                    <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-                    <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-                    <p class="whitetext" > Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
-                    <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-                    <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
-                  </div>
-                </li>
-              </ul>
-            </section>
+            <ul>
+              <li ng-repeat="trade in tradeFlow">
+                <div>
+                  <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+                  <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+                  <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+                  <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+                  <p class="whitetext"> Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                  <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+                  <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
+                </div>
+              </li>
+            </ul>
+          </section>
         </div>
       </div>
 
 
-      <form name="distributorForm2" id="distributorForm2" class="form item" style="display:none" ng-submit="DistributorSend(data)" ng-hide="recallFlag">
+      <form name="distributorForm2" id="distributorForm2" class="form item" style="display:none" ng-submit="DistributorSend(data)"
+        ng-hide="recallFlag">
         <span class="input-label">Select Pharmacy</span>
 
         <div class="item item-input item-select">

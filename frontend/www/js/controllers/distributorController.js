@@ -1,8 +1,15 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService',
-    function ($scope, $http, ionicToast, TimelineViewService, HelperService) {
+  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService','reverseAnythingFilter',
+    function ($scope, $http, ionicToast, TimelineViewService, HelperService,reverseAnythingFilter) {
 
       $scope.recallFlag = 0;
+
+      $scope.trades = JSON.parse(localStorage.getItem('trades'));
+      if ($scope.trades != null) {
+        $scope.reversedTrades = reverseAnythingFilter($scope.trades); //reverse order to descending
+      } else {
+        $scope.reversedTrades = [];
+      }
 
       $scope.pharmacies = [{
         "name": "Farmacia Salcette",
@@ -41,9 +48,6 @@ angular.module('app.controllers', [])
       }
 
       $scope.DistributorSearch = function (data) {
-
-        console.log(data);
-
         $http.get(backendUrl + "/drug/" + data.lot + "/2/verify")
           .success(function (response) {
             console.log(response);
