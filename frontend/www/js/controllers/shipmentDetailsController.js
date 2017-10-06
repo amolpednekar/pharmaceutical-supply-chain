@@ -1,9 +1,11 @@
-myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'ionicToast', 'SharedDataService', 'TimelineViewService',
-  function ($scope, $stateParams, $http, ionicToast, SharedDataService, TimelineViewService) {
+myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'ionicToast', 'SharedDataService', 'TimelineViewService','HelperService',
+  function ($scope, $stateParams, $http, ionicToast, SharedDataService, TimelineViewService, HelperService) {
     console.log($stateParams);
 
     $scope.recallFlag = 0;  //Toggle recall button
 
+    service = HelperService;
+    console.log("Service",service)
     $http.get(backendUrl + "/drug/" + $stateParams.shipmentId + "/1/verify")
       .success(function (response) {
         console.log("Drug get Success!", response);
@@ -12,8 +14,16 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
         $scope.drugTrade = response.data.tradedetails.drugtrade;
         $scope.tradeFlow = response.data.tradedetails.tradeflow;
         SharedDataService.TradeInfo = $scope.tradeFlow;
-        console.log('sharedData', SharedDataService)
+
+        // Barcode generate
+        JsBarcode("#barcode")
+        .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+        .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
+        .blank(2) // Create space between the barcodes
+        .render();
+
         $('#verifyResults').show();
+
       }).catch(function (err) {
         console.log(err);
         ionicToast.show('drugs_trades stream data not found! ', 'bottom', false, 5000);
@@ -33,9 +43,9 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
       TimelineViewService.timeline($scope);
     });
 
-    $scope.ToggleUnitFlag = function(){
-      $('#showMoreText').hide();
-      $('#showMore').show();
+
+    $scope.ToggleUnitFlag = function(arg){
+      service.toggleShow(arg);
     }
 
     $scope.RecallDrug = function () {
@@ -46,7 +56,7 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
       console.log('post_data.tradeDetails', post_data.tradeDetails)
       console.log("post_data", post_data);
       $http.post(backendUrl + "/drugrecall/", post_data).then(function (response) {
-        ionicToast.show('Lot #' + post_data.tradeDetails.drugTrade.lotnumber + 'revoked succesfully!', 'bottom', false, 5000);
+        ionicToast.show('Lot #' + post_data.tradeDetails.drugtrade.lotnumber + 'revoked succesfully!', 'bottom', false, 5000);
         console.log("Revocation Success", response);
       }, function (response) {
         console.log("Revocation Failure", response);

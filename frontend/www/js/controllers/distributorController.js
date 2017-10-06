@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService',
-    function ($scope, $http, ionicToast, TimelineViewService) {
+  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService',
+    function ($scope, $http, ionicToast, TimelineViewService, HelperService) {
 
       $scope.recallFlag = 0;
 
@@ -35,9 +35,9 @@ angular.module('app.controllers', [])
 
       });
 
-      $scope.ToggleUnitFlag = function(){
-        $('#showMoreText').hide();
-        $('#showMore').show();
+
+      $scope.ToggleUnitFlag = function (arg) {
+        HelperService.toggleShow(arg);
       }
 
       $scope.DistributorSearch = function (data) {
@@ -61,7 +61,15 @@ angular.module('app.controllers', [])
               $('#distributorForm2').show();
               $('#distributor-send').show();
             }
-            setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
+
+            // Barcode generate
+            JsBarcode("#barcode")
+              .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+              .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
+              .blank(2) // Create space between the barcodes
+              .render();
+            // Timeline viewer
+            setTimeout(function () { TimelineViewService.timeline($scope); }, 100);
           }).catch(function (err) {
             console.log(err);
             ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
@@ -77,10 +85,7 @@ angular.module('app.controllers', [])
             //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
           });
       }
-      // Timeline view logic
-      $scope.$on("$ionicView.afterEnter", function () {
 
-      });
       $scope.DistributorSend = function (data) {
         post_data = {};
         post_data.senderId = 2;

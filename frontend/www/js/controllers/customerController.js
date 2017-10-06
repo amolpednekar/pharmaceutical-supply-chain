@@ -2,11 +2,6 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
   function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.data = {};
 
-    $scope.ToggleUnitFlag = function(){
-      $('#showMoreText').hide();
-      $('#showMore').show();
-    }
-
     $scope.CustomerSearch = function (data) {
 
       result = data.mid.split('-');
@@ -27,6 +22,15 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
           } else {
             ionicToast.show('Medicine not found! Please contact the store of purchase immediately', 'bottom', false, 5000);
           }
+
+          // Barcode generate
+          JsBarcode("#barcode")
+          .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+          .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
+          .blank(2) // Create space between the barcodes
+          .render();
+
+
           setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
         }).catch(function (err) {
           console.log(err);

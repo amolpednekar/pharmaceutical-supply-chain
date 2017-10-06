@@ -1,10 +1,9 @@
-myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast','TimelineViewService',
-  function ($scope, $http, ionicToast, TimelineViewService) {
+myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService',
+  function ($scope, $http, ionicToast, TimelineViewService, HelperService) {
     $scope.recallFlag = 0;
 
-    $scope.ToggleUnitFlag = function(){
-      $('#showMoreText').hide();
-      $('#showMore').show();
+    $scope.ToggleUnitFlag = function (arg) {
+      HelperService.toggleShow(arg);
     }
 
     $scope.PharmacySearch = function (data) {
@@ -25,13 +24,21 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast','TimelineViewS
           } else {
             $('#pharmacyForm2').show();
           }
-          setTimeout(function(){ TimelineViewService.timeline($scope); }, 100);
+
+          // Barcode generate
+          JsBarcode("#barcode")
+            .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+            .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
+            .blank(2) // Create space between the barcodes
+            .render();
+
+          setTimeout(function () { TimelineViewService.timeline($scope); }, 100);
         }).catch(function (err) {
           console.log(err);
           ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
         });
 
-        $http.get(backendUrl + "/drugrecall/" + data.lot + "/3/verify")
+      $http.get(backendUrl + "/drugrecall/" + data.lot + "/3/verify")
         .success(function (response) {
           console.log("Drug get Success!", response);
           $scope.recallFlag = 1;

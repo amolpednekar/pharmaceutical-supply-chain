@@ -21,6 +21,7 @@
 .cardFormatting{
   text-align: left;
   margin-left: 15em;
+  font-weight: bold;
 }
 @media screen and (min-width: 720px) {
 	.screenadjust{
@@ -62,7 +63,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 
 .whitetext{
-  color: white;
+  color: black;
   text-align: left;
 }
 
@@ -143,7 +144,8 @@ h1 {
   bottom: 0;
   width: 400px;
   padding: 15px;
-  background: #000000;
+  background: #D3D3D3;
+
 }
 
 .timeline ul li div::before {
@@ -162,7 +164,7 @@ h1 {
 .timeline ul li:nth-child(odd) div::before {
   left: -15px;
   border-width: 8px 16px 8px 0;
-  border-color: transparent #000000 transparent transparent;
+  border-color: transparent #D3D3D3 transparent transparent;
 }
 
 .timeline ul li:nth-child(even) div {
@@ -172,7 +174,7 @@ h1 {
 .timeline ul li:nth-child(even) div::before {
   right: -15px;
   border-width: 8px 0 8px 16px;
-  border-color: transparent transparent transparent #000000;
+  border-color: transparent transparent transparent #D3D3D3;
 }
 
 time {
@@ -244,4 +246,14 @@ time {
     border-width: 8px 16px 8px 0;
     border-color: transparent #F45B69 transparent transparent;
   }
+}
+
+.ion-checkmark-circled {
+  color:green;
+}
+.ion-checkmark {
+  color:green;
+}
+.ion-close-circled{
+  color: red;
 }

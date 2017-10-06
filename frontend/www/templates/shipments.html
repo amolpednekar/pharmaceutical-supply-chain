@@ -29,20 +29,20 @@
     style="margin:15px;position:absolute; top:3.2em; right:0" ng-click="ClearStorage()">Clear Local Storage</button>
   </div>
     <div style="overflow-x:auto; margin:15px;">
-      <table>
+      <table style="display:none" id="shipmentsTable">
         <tr style="font-weight:bold">
           <th style="padding: 10px;">Lot Number</th>
           <th style="padding: 10px;">Date_Time</th>
           <th style="padding: 10px;">Receipient Name</th>
           <th style="padding: 10px;">Transaction ID</th>
-          <!--<th style="padding: 10px;">QR Code</th>-->
+          <th style="padding: 10px;">Pharmacode</th>
         </tr>
         <tr ng-repeat="trade in reversedTrades track by $index">
           <td style="padding: 10px;"><a href="#shipments/{{trade.lotnumber}}">{{trade.lotnumber}}</a></td>
           <td style="padding: 10px;">{{trade.datetime | date:" dd MMM yyyy hh:mm:ss"}}</td>
           <td style="padding: 10px;">{{trade.recipientname}}</td>
           <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
-          <!--<td style="padding: 10px;"><qr type-number="8" correction-level="'M'" size="200" input-mode="'ALPHA_NUM'" text="trade.lotnumber" image="true"></qr></td>-->
+          <td style="padding: 10px; padding-left:30px;"><svg id="barcode{{trade.lotnumber}}"></svg></td>
         </tr>
       </table>
     </div>

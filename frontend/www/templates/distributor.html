@@ -36,26 +36,42 @@
 
       <div id="verifyResults" style="margin-top:25px;display:none;">
 
-        <div class="card">
-          <div class="item item-divider">
-            Search Result
-          </div>
-          <div class="item item-text-wrap cardFormatting">
-            <p>Lot Number - {{drugTrade.lotnumber}}</p>
-            <p>NDC - {{drugTrade.nationaldrugcode}}</p>
-            <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
-            <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
-            <p>Quantity - {{drugTrade.quantity}}</p>
-            <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
-            <p>Units in lot:
-                <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index<2">{{drugTrade.lotnumber}}-{{unit}} | </span>
-                <a id="showMoreText" ng-click="ToggleUnitFlag()">Show More</a>
-                <span id="showMore" style="display:none" >
-                    <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index>1">{{drugTrade.lotnumber}}-{{unit}} | </span>
-                </span>
-              </p>
-          </div>
-        </div>
+          <div class="card">
+              <div class="item item-text-wrap cardFormatting" style="float:left; width:70%">
+                <p>Lot Number - {{drugTrade.lotnumber}}</p>
+                <p>NDC - {{drugTrade.nationaldrugcode}}</p>
+                <p>Product Name - {{drugTrade.productdetails.nonproprietaryname}}</p>
+                <p>Product Code - {{drugTrade.productdetails.productcode}}</p>
+                <p>Quantity - {{drugTrade.quantity}}</p>
+                <div ng-repeat="unit in drugTrade.unitsid"></div>
+                <p>Expiration Date - {{drugTrade.drugexpiratior | date:" dd MMM yyyy"}}</p>
+
+                <p>Units in lot:
+                  <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index<2">{{drugTrade.lotnumber}}-{{unit}} | </span>
+                  <a id="showMoreText" ng-click="ToggleUnitFlag(1)">Show More</a>
+                  <span id="showMore" style="display:none" >
+                      <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index>1">{{drugTrade.lotnumber}}-{{unit}} | </span>
+                  </span>
+                  <a id="showLessText" style="display:none" ng-click="ToggleUnitFlag(0)">Show Less</a>
+                </p>
+
+              </div>
+              <div style="float:right; width:30%">
+                  <br>
+                  <svg id="barcode"></svg>
+                  <div>
+                      <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
+                  </div>
+                  <br><br>
+
+                  <div ng-hide="recallFlag">
+                    <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
+                  </div>
+                  <div ng-show="recallFlag">
+                    <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
+                  </div>
+                </div>
+            </div>
 
         <hr>
 
@@ -79,30 +95,6 @@
               </ul>
             </section>
         </div>
-
-
-        <div class="card">
-          <div class="item item-divider">
-            Verification Status
-          </div>
-          <div class="item item-text-wrap">
-            <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="item item-divider">
-              Medicine Status
-          </div>
-          <div class="item item-text-wrap" ng-hide="recallFlag">
-              <i class="icon ion-checkmark-circled" ng-if="verificationStatus">&nbspApproved</i>
-          </div>
-          <div class="item item-text-wrap" ng-show="recallFlag">
-              <i class="icon ion-close-circled" ng-if="verificationStatus">&nbspRecalled</i>
-          </div>
-        </div>
-
-
       </div>
 
 
