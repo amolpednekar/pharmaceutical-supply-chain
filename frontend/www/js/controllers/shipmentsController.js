@@ -1,5 +1,5 @@
-myApp.controller('shipmentsCtrl', ['$scope', 'reverseAnythingFilter', 'ionicToast',
-  function ($scope, reverseAnythingFilter, ionicToast) {
+myApp.controller('shipmentsCtrl', ['$state','$scope', 'reverseAnythingFilter', 'ionicToast',
+  function ($state, $scope, reverseAnythingFilter, ionicToast) {
     $scope.trades = JSON.parse(localStorage.getItem('trades'));
     if ($scope.trades != null) {
       $scope.reversedTrades = reverseAnythingFilter($scope.trades); //reverse order to descending
@@ -29,7 +29,12 @@ myApp.controller('shipmentsCtrl', ['$scope', 'reverseAnythingFilter', 'ionicToas
 
     $scope.ClearStorage = function clearStorage() {
       localStorage.removeItem("trades");
-      ionicToast.show('Local Storage cleared successfully!', 'bottom', false, 5000);
+      swal({
+        title: 'Local Storage cleared successfully!',
+        button: false,
+      });
+      $state.go($state.current, {}, {reload: true});
+      // ionicToast.show('Local Storage cleared successfully!', 'bottom', false, 5000);
     }
     console.log('$scope.trades', $scope.trades)
     console.log('$scope.reversedTrades', $scope.reversedTrades)

@@ -14,9 +14,9 @@ const sendEmail = (to, emailBodyPlainText) => {
   
       // setup email data with unicode symbols
       let mailOptions = {
-        from: '"MediCare" <' + process.env.adminEmail + '>', // sender address
+        from: '"Alert" <' + process.env.adminEmail + '>', // sender address
         to: to, // list of receivers
-        subject: 'MediCare Alert: Medicine Recall!', // Subject line
+        subject: 'Alert: Medicine Recall!', // Subject line
         text: emailBodyPlainText, // plain text body
       };
   

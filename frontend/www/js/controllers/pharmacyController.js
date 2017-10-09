@@ -69,7 +69,8 @@ myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'Tim
         // ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
         swal({
           title: "Shipment Accepted!",
-          button: false
+          button: false,
+          timer: 1000
         });
         console.log(response);
         $state.go($state.current, {}, {reload: true});
