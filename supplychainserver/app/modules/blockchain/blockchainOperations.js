@@ -59,7 +59,7 @@ exports.drugTrade = function (req, response) {
 
 	var tradedetails = {};
 	tradedetails.drugtrade = drugtrade;
-	tradedetails.tradeflow = [{ sendername: participant.name, senderlabelercode: participant.labelercode, address: participant.address, sendersignature: signature, date: currentdate.toString(), recipientlabelercode: to.labelercode }]
+	tradedetails.tradeflow = [{ sendername: participant.name, senderlabelercode: participant.labelercode, address: participant.address, sendersignature: signature, date: currentdate.toString(), recipientlabelercode: to.labelercode, action: "SHIPMENT SENT" }]
 
 	console.log("Trade Details: ", tradedetails);
 
@@ -339,11 +339,11 @@ exports.updatedrugTrade = function (req, response) {
 	var currentdate = new Date().getTime();
 
 	var tradeflow = tradedetails.tradeflow;
-	tradeflow.push({ recipientname: caller.name, recipientlabelercode: caller.labelercode, address: caller.address, recipientsignature: signature, date: currentdate.toString() });
+	tradeflow.push({ recipientname: caller.name, recipientlabelercode: caller.labelercode, address: caller.address, recipientsignature: signature, date: currentdate.toString(), action: "SHIPMENT ACCEPTED" });
 
 	if (to != null) {
 
-		tradeflow.push({ sendername: caller.name, senderlabelercode: caller.labelercode, address: caller.address, sendersignature: signature, date: currentdate.toString(), recipientlabelercode: to.labelercode })
+		tradeflow.push({ sendername: caller.name, senderlabelercode: caller.labelercode, address: caller.address, sendersignature: signature, date: currentdate.toString(), recipientlabelercode: to.labelercode, action:"SHIPMENT SENT" })
 
 	}
 	tradedetails.tradeflow = tradeflow;
@@ -464,6 +464,9 @@ exports.recallDrug = function (req, response) {
 	trade.drugtrade = tradedetails.drugtrade;
 	console.log("Drug Trade Obj", trade.drugtrade);
 	trade.signature = signature;
+	trade.action = "LOT RECALLED"
+	var tradeflow = { recallername: caller.name, recallerlabelercode: caller.labelercode, address: caller.address, recallersignature: signature, date: currentdate.toString()}
+	trade.tradeflow = tradeflow;
 
 	console.log("Trade details(JSON string): ", JSON.stringify(trade))
 
