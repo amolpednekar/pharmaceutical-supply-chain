@@ -15,7 +15,7 @@
             <li><a href="#">Home</a></li>
             <li><a ui-sref="manufacturer">Manufacturer</a></li>
             <li><a ui-sref="shipments">Shipments</a></li>
-            <li><a ui-sref="distributor">Distributor</a></li>
+            <li class="active"><a ui-sref="distributor">Distributor</a></li>
             <li><a ui-sref="pharmacy">Pharmacy</a></li>
             <li><a ui-sref="customer">Customer</a></li>
             <li><a ui-sref="customer">Recalls</a></li>
@@ -24,8 +24,6 @@
       </div>
     </nav>
     <div class="screenadjust" style="text-align:center">
-
-      <h1 style="text-align:center;margin-top: 10px;">Distributor Portal</h1>
       <form name="distributorForm" class="form item">
         <select ng-model="data.lot" ng-change="DistributorSearch(data)">
           <option ng-repeat="trade in reversedTrades" value="{{trade.lotnumber}}">{{trade.lotnumber}}</option>
@@ -58,7 +56,7 @@
             <br>
             <svg id="barcode"></svg>
             <div>
-              <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspVerified</i>
+              <i class="icon ion-checkmark" ng-if="verificationStatus">&nbspSignature Verified</i>
             </div>
             <br><br>
 
@@ -70,9 +68,6 @@
             </div>
           </div>
         </div>
-
-        <hr>
-
         <div class="card">
           <div class="item item-divider">
             Distribution Flow
@@ -81,15 +76,25 @@
             <ul>
               <li ng-repeat="trade in tradeFlow">
                 <div>
+                  <p class="whitetext"> Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                  <p class="whitetext"> Action Taken - {{trade.action}}</p>
                   <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
                   <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
                   <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
                   <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-                  <p class="whitetext"> Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
                   <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
                   <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
                 </div>
               </li>
+              <li ng-if="recall">
+                  <div>
+                    <p class="whitetext" >Action - {{recall.action}}</p>
+                    <p class="whitetext" >Recall Initiator - {{recall.recallerName}}</p>
+                    <p class="whitetext" >Sender Labeler Code - {{recall.recallerLabelerCode}}</p>
+                    <p class="whitetext"> Signing Date - {{recall.signingDate | date:" dd MMM yyyy hh:mm:ss"}}</p>
+                    <p class="whitetext" >Signature - {{recall.recallerSignature}}</p>
+                  </div>
+                </li>
             </ul>
           </section>
         </div>

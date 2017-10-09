@@ -1,7 +1,7 @@
 myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService',
   function ($scope, $http, ionicToast, TimelineViewService) {
     $scope.data = {};
-
+    $scope.recall = null;
     $scope.CustomerSearch = function (data) {
 
       result = data.mid.split('-');
@@ -47,6 +47,14 @@ myApp.controller('customerCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
         .success(function (response) {
           console.log("Drug get Success!", response);
           $scope.recallFlag = 1;
+          recallObj = {
+            action: response.data.tradedetails.action,
+            recallerName: response.data.tradedetails.tradeflow.recallername,
+            recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
+            recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
+            signingDate: response.data.tradedetails.tradeflow.date
+          }
+          $scope.recall = recallObj;
         }).catch(function (err) {
           console.log(err);
           $scope.recallFlag = 0;

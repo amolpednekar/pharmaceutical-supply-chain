@@ -34,14 +34,24 @@
         <h3 class="font-bold" style="text-decoration:none">Distribution Flow </h3>
       </div>
       <div class="item item-text-wrap cardFormatting" ng-repeat="trade in tradeFlow">
-        <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-        <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-        <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-        <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-        <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
-        <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-        <p ng-if="trade.recipientsignature">Receipient Signature - {{trade.recipientsignature}}</p>
-      </div>
+          <p ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
+          <p ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
+          <p ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
+          <p ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
+          <p class="whitetext" ng-if="trade.sendername">Action - {{trade.action}}</p>
+          <p>Signing Date - {{trade.date | date:" dd MMM yyyy"}}</p>
+          <p class="whitetext">Action - {{trade.action}}</p>
+          <p ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
+          <p ng-if="trade.recipientsignature">Sender Signature - {{trade.recipientsignature}}</p>
+        </div>
+
+        <div ng-if="recall" class="item item-text-wrap cardFormatting">
+            <p>Recall Initiator - {{recall.recallerName}}</p>
+            <p>Sender Labeler Code - {{recall.recallerLabelerCode}}</p>
+            <p> Signing Date - {{recall.signingDate | date:" dd MMM yyyy hh:mm:ss"}}</p>
+            <p>Action - {{recall.action}}</p>
+            <p >Signature - {{recall.recallerSignature}}</p>
+          </div>
     </div>
   </div>
 

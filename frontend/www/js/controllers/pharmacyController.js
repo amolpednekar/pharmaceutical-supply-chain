@@ -1,6 +1,7 @@
 myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter',
   function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter) {
     $scope.recallFlag = 0;
+    $scope.recall = null;
     $scope.trades = JSON.parse(localStorage.getItem('trades'));
 
     if ($scope.trades != null) {
@@ -54,6 +55,14 @@ myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'Tim
         .success(function (response) {
           console.log("Drug get Success!", response);
           $scope.recallFlag = 1;
+          recallObj = {
+            action: response.data.tradedetails.action,
+            recallerName: response.data.tradedetails.tradeflow.recallername,
+            recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
+            recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
+            signingDate: response.data.tradedetails.tradeflow.date
+          }
+          $scope.recall = recallObj;
         }).catch(function (err) {
           console.log(err);
           $scope.recallFlag = 0;

@@ -82,6 +82,14 @@ angular.module('app.controllers', [])
         $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
           .success(function (response) {
             console.log("drugrecall get Success!", response);
+            recallObj = {
+              action: response.data.tradedetails.action,
+              recallerName: response.data.tradedetails.tradeflow.recallername,
+              recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
+              recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
+              signingDate: response.data.tradedetails.tradeflow.date
+            }
+            $scope.recall = recallObj;
             $scope.recallFlag = 1;
           }).catch(function (err) {
             console.log(err);

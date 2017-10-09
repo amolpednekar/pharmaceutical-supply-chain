@@ -3,6 +3,7 @@ myApp.factory('TimelineViewService', function () {
     timeline: function ($scope) {
       (function () {
         'use strict';
+
         $scope.scrollListener = function () {
           console.log("scrollListener");
           callbackFunc();
@@ -11,6 +12,7 @@ myApp.factory('TimelineViewService', function () {
         // define variables
         var items = document.querySelectorAll(".timeline li");
         console.log("items size", items.length)
+        callbackFunc();
         // check if an element is in viewport
         // http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
         function isElementInViewport(el) {
@@ -32,12 +34,12 @@ myApp.factory('TimelineViewService', function () {
           }
         }
 
-        // listen for events
-        window.addEventListener("load", callbackFunc);
+        // listen for resize events
         window.addEventListener("resize", callbackFunc);
 
-        // The below lines dont work for ion-content scrolling
+        // The below lines dont work for load/ion-content scrolling
         //window.addEventListener("scroll", callbackFunc);
+        //window.addEventListener("load", callbackFunc);
 
       })();
     }

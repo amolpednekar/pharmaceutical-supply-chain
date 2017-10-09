@@ -3,7 +3,7 @@ myApp.controller('shipmentsDetailsCtrl', ['$state','$scope', '$stateParams', '$h
     console.log($stateParams);
 
     $scope.recallFlag = 0;  //Toggle recall button
-
+    $scope.recall = null;
     service = HelperService;
     console.log("Service",service)
     $http.get(backendUrl + "/drug/" + $stateParams.shipmentId + "/1/verify")
@@ -14,7 +14,7 @@ myApp.controller('shipmentsDetailsCtrl', ['$state','$scope', '$stateParams', '$h
         $scope.drugTrade = response.data.tradedetails.drugtrade;
         $scope.tradeFlow = response.data.tradedetails.tradeflow;
         SharedDataService.TradeInfo = $scope.tradeFlow;
-
+        console.log("SharedDataService.TradeInfo",SharedDataService.TradeInfo)
         // Barcode generate
         JsBarcode("#barcode")
         .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
@@ -38,6 +38,16 @@ myApp.controller('shipmentsDetailsCtrl', ['$state','$scope', '$stateParams', '$h
       .success(function (response) {
         console.log("Drug get Success!", response);
         $scope.recallFlag = 1;
+        recallObj = {
+          action: response.data.tradedetails.action,
+          recallerName: response.data.tradedetails.tradeflow.recallername,
+          recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
+          recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
+          signingDate: response.data.tradedetails.tradeflow.date
+        }
+        $scope.recall = recallObj;
+        SharedDataService.RecallInfo = $scope.recall;
+        console.log('$scope.recall',$scope.recall)
       }).catch(function (err) {
         console.log(err);
         $scope.recallFlag = 0;
