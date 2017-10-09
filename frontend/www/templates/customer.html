@@ -68,7 +68,7 @@
             <ul>
               <li ng-repeat="trade in tradeFlow">
                   <div>
-                      <p class="whitetext" ng-if="trade.sendername">Action - {{trade.action}}</p>
+                      <p class="whitetext" ng-if="trade">Action - {{trade.action}}</p>
                       <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
                       <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
                       <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>

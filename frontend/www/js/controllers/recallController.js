@@ -21,7 +21,14 @@ myApp.controller('recallCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewSe
 
           $scope.drugTrade = response.data.tradedetails.drugtrade;
           $scope.verificationStatus = response.data.verificationstatus;
-
+          recallObj = {
+            action: response.data.tradedetails.action,
+            recallerName: response.data.tradedetails.tradeflow.recallername,
+            recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
+            recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
+            signingDate: response.data.tradedetails.tradeflow.date
+          }
+          $scope.recall = recallObj;
           $scope.recallFlag = 1;
           $('#verifyResults').show();
           // Barcode generate
