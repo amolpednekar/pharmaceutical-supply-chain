@@ -27,17 +27,28 @@
   <script src="lib/angular-qr-scanner/src/jsqrcode-combined.min.js"></script>
 
 
-  <!-- your app's js -->
+
+</head>
+
+
+
+<body ng-app="app">
+  <ion-nav-view></ion-nav-view>
   <script src="js/app.js"></script>
   <script src="js/script.js"></script>
+
+  <!-- App controllers -->
   <script src="js/controllers/homeController.js"></script>
   <script src="js/controllers/manufacturerController.js"></script>
   <script src="js/controllers/customerController.js"></script>
+  <script src="js/controllers/recallController.js"></script>
   <script src="js/controllers/distributorController.js"></script>
   <script src="js/controllers/pharmacyController.js"></script>
   <script src="js/controllers/shipmentsController.js"></script>
   <script src="js/controllers/shipmentDetailsController.js"></script>
   <script src="js/controllers/shipmentFlowController.js"></script>
+
+  <!-- App services -->
   <script src="js/services/sharedDataService.js"></script>
   <script src="js/services/timelineViewFactory.js"></script>
   <script src="js/services/helperService.js"></script>
@@ -46,27 +57,15 @@
   <script src="lib/jsbarcode/JsBarcode.all.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+  <!-- Custom Script -->
+  <script>
+    backendUrl = "http://10.51.233.255:8080"
   </script>
-  <script> backendUrl = "http://10.51.233.255:8080" </script>
-</head>
 
+  <!-- CDNs -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-<body ng-app="app">
-
-  <!--<div class="tabs">
-    <a class="tab-item" ui-sref="home">Home</a>
-    <a class="tab-item" ui-sref="shipments">Shipments</a>
-    <a class="tab-item" ui-sref="distributor">Distributor</a>
-    <a class="tab-item" ui-sref="pharmacy">Pharmacy</a>
-    <a class="tab-item" ui-sref="customer">Customer</a>
-  </div>-->
-
-  <ion-nav-view></ion-nav-view>
-  </div>
 </body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </html>

@@ -41,12 +41,6 @@ myApp.run(function ($ionicPlatform, $rootScope) {
         controller: 'manufacturerCtrl',
         cache: false,
       })
-      .state('distributor', {
-        url: '/distributor',
-        templateUrl: 'templates/distributor.html',
-        controller: 'distributorCtrl',
-        cache: false,
-      })
       .state('pharmacy', {
         url: '/pharmacy',
         templateUrl: 'templates/pharmacy.html',
@@ -73,6 +67,16 @@ myApp.run(function ($ionicPlatform, $rootScope) {
         url: '/shipments/:shipmentId/shipmentflow',
         templateUrl: 'templates/shipmentFlow.html',
         controller: 'shipmentFlowCtrl',
+        cache: false
+      }).state('distributor', {
+        url: '/distributor',
+        templateUrl: 'templates/distributor.html',
+        controller: 'distributorCtrl',
+        cache: false,
+      }).state('recall',{
+        url: '/recall',
+        templateUrl: 'templates/recall.html',
+        controller: 'recallCtrl',
         cache: false
       });
 

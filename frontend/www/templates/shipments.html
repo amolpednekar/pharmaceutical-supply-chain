@@ -18,16 +18,17 @@
             <li><a ui-sref="distributor">Distributor</a></li>
             <li><a ui-sref="pharmacy">Pharmacy</a></li>
             <li><a ui-sref="customer">Customer</a></li>
+            <li><a ui-sref="recall">Recalls</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <div>
-    <h1 style="margin:15px; text-align:center; ">Shipments</h1>
+      <h1 style="margin:15px; text-align:center; ">Shipments</h1>
 
-    <button class="button button-medium button-radius button-assertive"
-    style="margin:15px;position:absolute; top:3.2em; right:0" ng-click="ClearStorage()">Clear Local Storage</button>
-  </div>
+      <button class="button button-medium button-radius button-assertive" style="margin:15px;position:absolute; top:3.2em; right:0"
+        ng-click="ClearStorage()">Clear Local Storage</button>
+    </div>
     <div style="overflow-x:auto; margin:15px;">
       <table style="display:none" id="shipmentsTable">
         <tr style="font-weight:bold">
@@ -42,7 +43,9 @@
           <td style="padding: 10px;">{{trade.datetime | date:" dd MMM yyyy hh:mm:ss"}}</td>
           <td style="padding: 10px;">{{trade.recipientname}}</td>
           <td style="padding: 10px;">{{trade.drugstradetxid}}</td>
-          <td style="padding: 10px; padding-left:30px;"><svg id="barcode{{trade.lotnumber}}"></svg></td>
+          <td style="padding: 10px; padding-left:30px;">
+            <svg id="barcode{{trade.lotnumber}}"></svg>
+          </td>
         </tr>
       </table>
     </div>

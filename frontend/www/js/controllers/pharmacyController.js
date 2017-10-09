@@ -1,5 +1,5 @@
-myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService','reverseAnythingFilter',
-  function ($scope, $http, ionicToast, TimelineViewService, HelperService,reverseAnythingFilter) {
+myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter',
+  function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter) {
     $scope.recallFlag = 0;
     $scope.trades = JSON.parse(localStorage.getItem('trades'));
 
@@ -34,7 +34,7 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
 
           // Barcode generate
           JsBarcode("#barcode")
-            .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+          .options({ font: "OCR-B", displayValue: false, width: 5, height: 35, margin: 0 }) // Will affect all barcodes
             .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
             .blank(2) // Create space between the barcodes
             .render();
@@ -42,7 +42,12 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
           setTimeout(function () { TimelineViewService.timeline($scope); }, 100);
         }).catch(function (err) {
           console.log(err);
-          ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
+          $('#verifyResults').hide();
+          //ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
+          swal({
+            title: "Lot data not found!",
+            button: false
+          });
         });
 
       $http.get(backendUrl + "/drugrecall/" + data.lot + "/3/verify")
@@ -61,10 +66,20 @@ myApp.controller('pharmacyCtrl', ['$scope', '$http', 'ionicToast', 'TimelineView
       post_data.tradeDetails = $scope.tradeDetails;
 
       $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-        ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
+        // ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
+        swal({
+          title: "Shipment Accepted!",
+          button: false
+        });
         console.log(response);
+        $state.go($state.current, {}, {reload: true});
       }, function (response) {
-        ionicToast.show('TPharmacy Acceptance failed, try again!', 'bottom', false, 5000);
+        // ionicToast.show('TPharmacy Acceptance failed, try again!', 'bottom', false, 5000);
+        swal({
+          title: "Oops, there was an error! Please try again",
+          button: false,
+          timer: 1000
+        });
         console.log(response);
       });
 

@@ -1,5 +1,5 @@
-myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'ionicToast', 'SharedDataService', 'TimelineViewService','HelperService',
-  function ($scope, $stateParams, $http, ionicToast, SharedDataService, TimelineViewService, HelperService) {
+myApp.controller('shipmentsDetailsCtrl', ['$state','$scope', '$stateParams', '$http', 'ionicToast', 'SharedDataService', 'TimelineViewService','HelperService',
+  function ($state, $scope, $stateParams, $http, ionicToast, SharedDataService, TimelineViewService, HelperService) {
     console.log($stateParams);
 
     $scope.recallFlag = 0;  //Toggle recall button
@@ -24,9 +24,14 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
 
         $('#verifyResults').show();
 
+        setTimeout(function () { TimelineViewService.timeline($scope); }, 100);
       }).catch(function (err) {
         console.log(err);
-        ionicToast.show('drugs_trades stream data not found! ', 'bottom', false, 5000);
+        swal({
+          title: "Lot data not found!",
+          button: false,
+          timer: 1000
+        });
       });
 
     $http.get(backendUrl + "/drugrecall/" + $stateParams.shipmentId + "/1/verify")
@@ -37,12 +42,6 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
         console.log(err);
         $scope.recallFlag = 0;
       });
-
-    // Timeline view logic
-    $scope.$on("$ionicView.afterEnter", function () {
-      TimelineViewService.timeline($scope);
-    });
-
 
     $scope.ToggleUnitFlag = function(arg){
       service.toggleShow(arg);
@@ -56,11 +55,22 @@ myApp.controller('shipmentsDetailsCtrl', ['$scope', '$stateParams', '$http', 'io
       console.log('post_data.tradeDetails', post_data.tradeDetails)
       console.log("post_data", post_data);
       $http.post(backendUrl + "/drugrecall/", post_data).then(function (response) {
-        ionicToast.show('Lot #' + post_data.tradeDetails.drugtrade.lotnumber + 'revoked succesfully!', 'bottom', false, 5000);
+        // ionicToast.show('Lot #' + post_data.tradeDetails.drugtrade.lotnumber + ' revoked succesfully!', 'bottom', false, 5000);
+        swal({
+          title: 'Lot #' + post_data.tradeDetails.drugtrade.lotnumber + ' revoked succesfully!',
+          button: false,
+          timer: 1000
+        });
         console.log("Revocation Success", response);
+        $state.go($state.current, {}, {reload: true});
       }, function (response) {
         console.log("Revocation Failure", response);
-        ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
+        // ionicToast.show('There was an error, please try again!', 'bottom', false, 5000);
+        swal({
+          title: "Oops, there was an error! Please try again",
+          button: false,
+          timer: 1000
+        });
       });
     }
   }]);

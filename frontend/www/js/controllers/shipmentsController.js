@@ -11,8 +11,8 @@ myApp.controller('shipmentsCtrl', ['$scope', 'reverseAnythingFilter', 'ionicToas
       for (i = 0; i < $scope.reversedTrades.length; i++) {
 
         JsBarcode("#barcode" + $scope.reversedTrades[i].lotnumber)
-          .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
-          .pharmacode(($scope.reversedTrades[i].lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
+          .options({ font: "OCR-B", displayValue: false, width: 5, height: 35, margin: 0 }) // Will affect all barcodes
+          .pharmacode(($scope.reversedTrades[i].lotnumber) % 1000, { fontSize: 18, textMargin: 0, lineColor: "#006400" })
           .blank(2) // Create space between the barcodes
           .render();
       }

@@ -11,7 +11,7 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
         showTodayButton: true,
         calendarMode: false,
         hideCancelButton: false,
-        hideSetButton: false,
+        hideSetButton: true,
         callback: function(value){
             $scope.expirationDate = value;
         }
@@ -129,17 +129,23 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       $http.post(backendUrl + "/drugtrade", post_data)
         .success(function (response) {
           console.log(response);
-          ionicToast.show('Manufacturer Send Successful!!', 'bottom', false, 5000);
+          // ionicToast.show('Manufacturer Send Successful!!', 'bottom', false, 5000);
+          swal({
+            title: "Data sent successfully!",
+            button: false,
+            timer: 1000
+          })
           // Store response data in browser's local storage
           allTrades.push(response.data);
           localStorage.setItem('trades', JSON.stringify(allTrades));
           $state.go('shipments');
-
-
         }).catch(function (err) {
-          console.log("Failed");
-          ionicToast.show('Manufacturer Send Failed!', 'bottom', false, 5000);
-          console.log(err);
+          swal({
+            title: "Oops, there was an error! Please try again",
+            button: false,
+            timer: 1000
+          });
+          console.log("Failed", err);
         });
     }
   }]);

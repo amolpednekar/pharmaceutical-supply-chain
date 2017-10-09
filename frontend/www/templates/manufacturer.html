@@ -18,6 +18,7 @@
             <li><a ui-sref="distributor">Distributor</a></li>
             <li><a ui-sref="pharmacy">Pharmacy</a></li>
             <li><a ui-sref="customer">Customer</a></li>
+            <li><a ui-sref="recall">Recalls</a></li>
           </ul>
         </div>
       </div>
@@ -41,7 +42,7 @@
         </div>
         <span class="input-label">Drug Expiration Date</span>
         <onezone-datepicker datepicker-object="onezoneDatepicker">
-            <button class="button button-block button-outline button-positive show-onezone-datepicker">
+          <button class="button button-block button-outline button-positive show-onezone-datepicker">
                 {{onezoneDatepicker.date | date:'dd MMMM yyyy'}}
             </button>
         </onezone-datepicker>

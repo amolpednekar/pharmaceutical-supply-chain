@@ -4,10 +4,10 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
           <a class="navbar-brand" href="#">Distribution Chain Manager</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -25,6 +25,13 @@
     </nav>
     <div class="screenadjust" style="text-align:center">
 
+      <h1 style="text-align:center;margin-top: 10px;">Recall Portal</h1>
+      <form name="distributorForm" class="form item">
+        <select ng-model="data.lot" ng-change="RecallSearch(data)">
+            <option ng-repeat="trade in reversedTrades" value="{{trade.lotnumber}}">{{trade.lotnumber}}</option>
+          </select>
+      </form>
+
       <div id="verifyResults" style="margin-top:25px;display:none;">
 
         <div class="card">
@@ -41,7 +48,7 @@
               <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index<2">{{drugTrade.lotnumber}}-{{unit}} | </span>
               <a id="showMoreText" ng-click="ToggleUnitFlag(1)">Show More</a>
               <span id="showMore" style="display:none">
-                  <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index>1">{{drugTrade.lotnumber}}-{{unit}} | </span>
+                        <span ng-repeat="unit in drugTrade.unitsid" ng-if="$index>1">{{drugTrade.lotnumber}}-{{unit}} | </span>
               </span>
               <a id="showLessText" style="display:none" ng-click="ToggleUnitFlag(0)">Show Less</a>
             </p>
@@ -63,39 +70,10 @@
             </div>
           </div>
         </div>
-
         <hr>
-
-
-        <div class="card">
-          <div class="item item-divider">
-            <a href="#shipments/{{drugTrade.lotnumber}}/shipmentflow">Distribution Flow</a>
-          </div>
-        </div>
-
-
-
-        <section class="timeline">
-          <ul>
-            <li ng-repeat="trade in tradeFlow">
-              <div>
-                <p class="whitetext" ng-if="trade.sendername">Sender Name - {{trade.sendername}}</p>
-                <p class="whitetext" ng-if="trade.senderlabelercode">Sender Labeler Code - {{trade.senderlabelercode}}</p>
-                <p class="whitetext" ng-if="trade.recipientname">Receipient Name - {{trade.recipientname}}</p>
-                <p class="whitetext" ng-if="trade.recipientlabelercode">Receipient Labeler Code - {{trade.recipientlabelercode}}</p>
-                <p class="whitetext"> Signing Date - {{trade.date | date:" dd MMM yyyy hh:mm:ss"}}</p>
-                <p class="whitetext" ng-if="trade.sendersignature">Sender Signature - {{trade.sendersignature}}</p>
-                <p class="whitetext" ng-if="trade.recipientsignature">Recipient Signature - {{trade.recipientsignature}}</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        <button id="create-deal" class="button button-medium button-radius button-balanced" ng-hide="recallFlag" ng-click="RecallDrug()">
-          <label>Recall<label>
-        </button>
-
       </div>
+    </div>
+    </form>
     </div>
   </ion-content>
 </ion-view>

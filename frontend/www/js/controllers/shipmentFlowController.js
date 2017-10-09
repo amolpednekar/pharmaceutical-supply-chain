@@ -3,7 +3,4 @@ myApp.controller('shipmentFlowCtrl', ['$scope', '$state', 'ionicToast', '$ionicS
 
     $scope.tradeFlow = SharedDataService.TradeInfo;
 
-    $scope.$on("$ionicView.afterEnter", function () {
-      TimelineViewService.timeline($scope);
-    });
   }]);

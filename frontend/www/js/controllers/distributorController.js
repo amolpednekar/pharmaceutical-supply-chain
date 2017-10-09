@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService','reverseAnythingFilter',
-    function ($scope, $http, ionicToast, TimelineViewService, HelperService,reverseAnythingFilter) {
+  .controller('distributorCtrl', ['$state', '$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter',
+    function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter) {
 
       $scope.recallFlag = 0;
 
@@ -68,7 +68,7 @@ angular.module('app.controllers', [])
 
             // Barcode generate
             JsBarcode("#barcode")
-              .options({ font: "OCR-B", displayValue: false, width: 5, height: 25, margin: 0 }) // Will affect all barcodes
+              .options({ font: "OCR-B", displayValue: false, width: 5, height: 35, margin: 0 }) // Will affect all barcodes
               .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
               .blank(2) // Create space between the barcodes
               .render();
@@ -88,6 +88,9 @@ angular.module('app.controllers', [])
             $scope.recallFlag = 0;
             //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
           });
+
+
+
       }
 
       $scope.DistributorSend = function (data) {
@@ -97,10 +100,21 @@ angular.module('app.controllers', [])
         post_data.tradeDetails = $scope.tradeDetails;
 
         $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-          ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
+          // ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
+          swal({
+            title: "Data sent successfully!",
+            button: false,
+            timer: 1000
+          });
           console.log("Success", response);
+          $state.go($state.current, {}, { reload: true });
         }, function (response) {
-          ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
+          // ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
+          swal({
+            title: "Oops, there was an error! Please try again",
+            button: false,
+            timer: 1000
+          });
           console.log("Failure", response);
         });
 
