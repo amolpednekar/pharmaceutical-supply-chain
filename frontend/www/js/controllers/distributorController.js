@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$state', '$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter','httpGetFactory',
-    function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter, httpGetFactory) {
+  .controller('distributorCtrl', ['$state', '$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter','httpGetFactory','httpPostFactory',
+    function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter, httpGetFactory,httpPostFactory) {
 
       $scope.recallFlag = 0;
 
@@ -57,25 +57,27 @@ angular.module('app.controllers', [])
         post_data.senderId = 2;
         post_data.pharamacyId = 3;
         post_data.tradeDetails = $scope.tradeDetails;
+        var alerts = ["Data sent successfully!", "Oops, there was an error! Please try again"]
+        httpPostFactory.put(post_data,  $state, alerts)
 
-        $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-          // ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
-          swal({
-            title: "Data sent successfully!",
-            button: false,
-            timer: 1000
-          });
-          console.log("Success", response);
-          $state.go($state.current, {}, { reload: true });
-        }, function (response) {
-          // ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
-          swal({
-            title: "Oops, there was an error! Please try again",
-            button: false,
-            timer: 1000
-          });
-          console.log("Failure", response);
-        });
+        // $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
+        //   // ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
+        //   swal({
+        //     title: "Data sent successfully!",
+        //     button: false,
+        //     timer: 1000
+        //   });
+        //   console.log("Success", response);
+        //   $state.go($state.current, {}, { reload: true });
+        // }, function (response) {
+        //   // ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
+        //   swal({
+        //     title: "Oops, there was an error! Please try again",
+        //     button: false,
+        //     timer: 1000
+        //   });
+        //   console.log("Failure", response);
+        // });
 
       };
 

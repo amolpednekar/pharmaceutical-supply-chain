@@ -1,5 +1,5 @@
-myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter','httpGetFactory',
-  function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter, httpGetFactory) {
+myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter','httpGetFactory','httpPostFactory',
+  function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter, httpGetFactory, httpPostFactory) {
 
     $scope.recallFlag = 0;
     $scope.recall = null;
@@ -21,32 +21,35 @@ myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'Tim
     var formIds = ["#verifyResults","#pharmacyForm2"];
     var services = [TimelineViewService];
     $scope.PharmacySearch = function(data){
-      httpGetFactory.get($scope, data, formIds, TimelineViewService);
+      httpGetFactory.get($scope, data, formIds, services);
     }
 
     $scope.PharmacyAccept = function (data) {
       post_data = {};
       post_data.senderId = 3;
       post_data.tradeDetails = $scope.tradeDetails;
+      var alerts = ["Shipment Accepted!", "Oops, there was an error! Please try again"];
 
-      $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-        // ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
-        swal({
-          title: "Shipment Accepted!",
-          button: false,
-          timer: 1000
-        });
-        console.log(response);
-        $state.go($state.current, {}, {reload: true});
-      }, function (response) {
-        // ionicToast.show('TPharmacy Acceptance failed, try again!', 'bottom', false, 5000);
-        swal({
-          title: "Oops, there was an error! Please try again",
-          button: false,
-          timer: 1000
-        });
-        console.log(response);
-      });
+      httpPostFactory.put(post_data,  $state, alerts)
+
+      // $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
+      //   // ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
+      //   swal({
+      //     title: "Shipment Accepted!",
+      //     button: false,
+      //     timer: 1000
+      //   });
+      //   console.log(response);
+      //   $state.go($state.current, {}, {reload: true});
+      // }, function (response) {
+      //   // ionicToast.show('TPharmacy Acceptance failed, try again!', 'bottom', false, 5000);
+      //   swal({
+      //     title: "Oops, there was an error! Please try again",
+      //     button: false,
+      //     timer: 1000
+      //   });
+      //   console.log(response);
+      // });
 
     };
 

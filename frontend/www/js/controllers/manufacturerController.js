@@ -1,5 +1,5 @@
-myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state', 'ionicToast',
-  function ($scope, $http, $state, ionicToast, jsonFactory) {
+myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state', 'ionicToast','httpPostFactory',
+  function ($scope, $http, $state, ionicToast, httpPostFactory) {
 
     var allTrades = [];
 
@@ -89,26 +89,27 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state', 'ionicToast',
       post_data.productInfo = $scope.productInfo;
       post_data.receiverInfo = 2;
       console.log("Manufacturer Post Data", post_data);
-
-      $http.post(backendUrl + "/drugtrade", post_data)
-        .success(function (response) {
-          console.log("Manufacturer Post response",response);
-          swal({
-            title: "Data sent successfully!",
-            button: false,
-            timer: 1000
-          })
-          // Store response data in browser's local storage
-          allTrades.push(response.data);
-          localStorage.setItem('trades', JSON.stringify(allTrades));
-          $state.go('shipments');
-        }).catch(function (err) {
-          swal({
-            title: "Oops, there was an error! Please try again",
-            button: false,
-            timer: 1000
-          });
-          console.log("Failed", err);
-        });
+      console.log('httpPostFactory',httpPostFactory)
+      httpPostFactory.post(post_data, $state, allTrades);
+      // $http.post(backendUrl + "/drugtrade", post_data)
+      //   .success(function (response) {
+      //     console.log("Manufacturer Post response",response);
+      //     swal({
+      //       title: "Data sent successfully!",
+      //       button: false,
+      //       timer: 1000
+      //     })
+      //     // Store response data in browser's local storage
+      //     allTrades.push(response.data);
+      //     localStorage.setItem('trades', JSON.stringify(allTrades));
+      //     $state.go('shipments');
+      //   }).catch(function (err) {
+      //     swal({
+      //       title: "Oops, there was an error! Please try again",
+      //       button: false,
+      //       timer: 1000
+      //     });
+      //     console.log("Failed", err);
+      //   });
     }
   }]);
