@@ -1,19 +1,25 @@
 myApp.factory('httpPostFactory', function($http){
   service = {};
 
-  service.post = function(post_data, $state, allTrades){
-    $http.post(backendUrl + "/drugtrade", post_data)
+  service.post = function(post_data, $state, endpoint, alerts, allTrades){
+    $http.post(backendUrl + "/" + endpoint, post_data)
     .success(function (response) {
       console.log("Manufacturer Post response",response);
       swal({
-        title: "Data sent successfully!",
+        title: alerts[0],
         button: false,
         timer: 1000
       })
-      // Store response data in browser's local storage
-      allTrades.push(response.data);
-      localStorage.setItem('trades', JSON.stringify(allTrades));
-      $state.go('shipments');
+
+      if(allTrades){
+        // Store response data in browser's local storage
+        allTrades.push(response.data);
+        localStorage.setItem('trades', JSON.stringify(allTrades));
+        $state.go('shipments');
+      }else{
+        $state.go($state.current, {}, { reload: true });
+      }
+
     }).catch(function (err) {
       swal({
         title: "Oops, there was an error! Please try again",

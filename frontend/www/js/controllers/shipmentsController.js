@@ -17,12 +17,6 @@ myApp.controller('shipmentsCtrl', ['$state','$scope', 'reverseAnythingFilter', '
           .render();
       }
 
-      // swal({
-      //   title: "Shipments Loaded",
-      //   timer: 1000,
-      //   showConfirmButton: false
-      // });
-
       $('#shipmentsTable').show();
 
     });

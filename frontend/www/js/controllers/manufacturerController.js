@@ -91,6 +91,8 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state', 'ionicToast',
       console.log("Manufacturer Post Data", post_data);
 
       // Posting to url/drugtrade
-      httpPostFactory.post(post_data, $state, allTrades);
+      var endpoint = "drugtrade";
+      alerts = ["Data Published Successfully!"]
+      httpPostFactory.post(post_data, $state, endpoint, alerts, allTrades);
     }
   }]);
