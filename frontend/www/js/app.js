@@ -59,12 +59,12 @@ myApp.run(function ($ionicPlatform, $rootScope) {
         controller: 'shipmentsCtrl',
         cache: false,
       }).state('shipmentDetails', {
-        url: '/shipments/:shipmentId',
+        url: '/shipments/:lot',
         templateUrl: 'templates/shipmentDetails.html',
         controller: 'shipmentsDetailsCtrl',
         cache: false,
       }).state('shipmentFlow', {
-        url: '/shipments/:shipmentId/shipmentflow',
+        url: '/shipments/:lot/shipmentflow',
         templateUrl: 'templates/shipmentFlow.html',
         controller: 'shipmentFlowCtrl',
         cache: false

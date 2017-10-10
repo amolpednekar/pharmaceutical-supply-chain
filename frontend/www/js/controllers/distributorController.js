@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
-  .controller('distributorCtrl', ['$state', '$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter',
-    function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter) {
+  .controller('distributorCtrl', ['$state', '$scope', '$http', 'ionicToast', 'TimelineViewService', 'HelperService', 'reverseAnythingFilter','httpGetFactory',
+    function ($state, $scope, $http, ionicToast, TimelineViewService, HelperService, reverseAnythingFilter, httpGetFactory) {
 
       $scope.recallFlag = 0;
 
@@ -43,54 +43,13 @@ angular.module('app.controllers', [])
         HelperService.toggleShow(arg);
       }
 
-      $scope.DistributorSearch = function (data) {
-        $http.get(backendUrl + "/drug/" + data.lot + "/2/verify")
-          .success(function (response) {
-            console.log(response);
-            $scope.tradeDetails = response.data.tradedetails;
-            $scope.verificationStatus = response.data.verificationstatus;
-            $scope.drugTrade = response.data.tradedetails.drugtrade;
-            $scope.tradeFlow = response.data.tradedetails.tradeflow;
+      // Data Querying
 
-            $('#verifyResults').show();
-            if ($scope.tradeFlow.length >= 2 && $scope.tradeFlow[0].recipientlabelercode === $scope.tradeFlow[2].senderlabelercode) {
-              // Do nothing
-            } else {
-              $('#distributorForm2').show();
-              $('#distributor-send').show();
-            }
-
-            // Barcode generate
-            JsBarcode("#barcode")
-              .options({ font: "OCR-B", displayValue: false, width: 5, height: 35, margin: 0 }) // Will affect all barcodes
-              .pharmacode(($scope.drugTrade.lotnumber) % 1000, { fontSize: 18, textMargin: 0 })
-              .blank(2) // Create space between the barcodes
-              .render();
-            // Timeline viewer
-            setTimeout(function () { TimelineViewService.timeline($scope); }, 100);
-          }).catch(function (err) {
-            console.log(err);
-            ionicToast.show('Data Not Found! ', 'bottom', false, 5000);
-          });
-
-        $http.get(backendUrl + "/drugrecall/" + data.lot + "/2/verify")
-          .success(function (response) {
-            console.log("drugrecall get Success!", response);
-            recallObj = {
-              action: response.data.tradedetails.action,
-              recallerName: response.data.tradedetails.tradeflow.recallername,
-              recallerLabelerCode: response.data.tradedetails.tradeflow.recallerlabelercode,
-              recallerSignature: response.data.tradedetails.tradeflow.recallersignature,
-              signingDate: response.data.tradedetails.tradeflow.date
-            }
-            $scope.recall = recallObj;
-            $scope.recallFlag = 1;
-          }).catch(function (err) {
-            console.log(err);
-            $scope.recallFlag = 0;
-            //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
-          });
-
+      $scope.callerId = 2;
+      var formIds = ["#verifyResults","#distributorForm2","#distributor-send"];
+      var services = [TimelineViewService];
+      $scope.DistributorSearch = function(data){
+        httpGetFactory.get($scope, data, formIds, services);
       }
 
       $scope.DistributorSend = function (data) {
