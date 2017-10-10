@@ -44,7 +44,6 @@ angular.module('app.controllers', [])
       }
 
       // Data Querying
-
       $scope.callerId = 2;
       var formIds = ["#verifyResults","#distributorForm2","#distributor-send"];
       var services = [TimelineViewService];
@@ -58,26 +57,9 @@ angular.module('app.controllers', [])
         post_data.pharamacyId = 3;
         post_data.tradeDetails = $scope.tradeDetails;
         var alerts = ["Data sent successfully!", "Oops, there was an error! Please try again"]
-        httpPostFactory.put(post_data,  $state, alerts)
 
-        // $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-        //   // ionicToast.show('Distributor Send Successful!', 'bottom', false, 5000);
-        //   swal({
-        //     title: "Data sent successfully!",
-        //     button: false,
-        //     timer: 1000
-        //   });
-        //   console.log("Success", response);
-        //   $state.go($state.current, {}, { reload: true });
-        // }, function (response) {
-        //   // ionicToast.show('Distributor Send Failed, please try again!', 'bottom', false, 5000);
-        //   swal({
-        //     title: "Oops, there was an error! Please try again",
-        //     button: false,
-        //     timer: 1000
-        //   });
-        //   console.log("Failure", response);
-        // });
+        // Posting to url/drugtrade
+        httpPostFactory.put(post_data,  $state, alerts)
 
       };
 

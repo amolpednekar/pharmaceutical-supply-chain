@@ -30,26 +30,8 @@ myApp.controller('pharmacyCtrl', ['$state','$scope', '$http', 'ionicToast', 'Tim
       post_data.tradeDetails = $scope.tradeDetails;
       var alerts = ["Shipment Accepted!", "Oops, there was an error! Please try again"];
 
-      httpPostFactory.put(post_data,  $state, alerts)
-
-      // $http.put(backendUrl + "/drugtrade", post_data).then(function (response) {
-      //   // ionicToast.show('Pharmacy Acceptance Successful!', 'bottom', false, 5000);
-      //   swal({
-      //     title: "Shipment Accepted!",
-      //     button: false,
-      //     timer: 1000
-      //   });
-      //   console.log(response);
-      //   $state.go($state.current, {}, {reload: true});
-      // }, function (response) {
-      //   // ionicToast.show('TPharmacy Acceptance failed, try again!', 'bottom', false, 5000);
-      //   swal({
-      //     title: "Oops, there was an error! Please try again",
-      //     button: false,
-      //     timer: 1000
-      //   });
-      //   console.log(response);
-      // });
+      // Posting to url/drugtrade
+      httpPostFactory.put(post_data,  $state, alerts);
 
     };
 
