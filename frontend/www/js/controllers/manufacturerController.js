@@ -1,86 +1,50 @@
-myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
-  function ($scope, $http, $state,ionicToast) {
+myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state', 'ionicToast',
+  function ($scope, $http, $state, ionicToast, jsonFactory) {
 
-      $scope.onezoneDatepicker = {
-        date: new Date(), // MANDATORY
-        mondayFirst: false,
-        disablePastDays: true,
-        disableSwipe: false,
-        disableWeekend: false,
-        showDatepicker: false,
-        showTodayButton: true,
-        calendarMode: false,
-        hideCancelButton: false,
-        hideSetButton: true,
-        callback: function(value){
-            $scope.expirationDate = value;
-        }
-      };
-    $scope.manufacturer = {
-      "name": "Merck Pharmaceutical",
-      "address": "Fl No-f 02, Mithsu Resindency, Jofilnagar, Ponda, Ponda, Goa, Fl No-f 02, Goa 403401",
-      "labelercode": "8532",
-      "multichainaddress": "1GvLczuVCVjaN78gB7BESF6rA5P7UhcvroQhK6",
-      "keyspath": "./keystore/manfkeystore/credentials.pem",
-      "ip": "169.254.216.151",
-      "port": "8999",
-      "user": "multichainrpc",
-      "pass": "3sALXzUAct65Mv2CxfKrDZgUDJ4GhJWootWzshKsM41A"
-    }
+    var allTrades = [];
 
-    $scope.products = [{
+    // Get static json data for the form
 
-      "pid": "4020",
-      "name": "Celexa",
-      "producttypename": "HUMAN PRESCRIPTION DRUG",
-      "proprietaryname": "Celexa",
-      "nonproprietaryname": "Citalopram Hydrobromide",
-      "dosageformname": "TABLET, FILM COATED",
-      "routename": "ORAL",
-      "strengthnumber": "40",
-      "strengthunit": "mg/1",
-      "productcode": "4020"
+    $http.get('participants.json').success(function (response) {
+      $scope.manufacturer = response[1];
+      $scope.receivers = [response[2]];
+    })
 
-    },
-    {
-      "pid": "2011",
-      "name": "Vicodin",
-      "producttypename": "HUMAN PRESCRIPTION DRUG",
-      "proprietaryname": "Vicodin",
-      "nonproprietaryname": "Hydrocodone Bitartrate and Acetaminophen",
-      "dosageformname": "TABLET",
-      "routename": "ORAL",
-      "strengthnumber": "5; 300",
-      "strengthunit": "mg/1; mg/1",
-      "productcode": "3041"
-    }];
+    $http.get('productdetails.json').success(function(response){
+      $scope.products = response;
+    })
 
-    $scope.receivers = [{
-      "name": "Orient Pharmaceutical Distributor",
-      "address": "1-2,Orient Tower,Behind Loyala High School, Margao, Goa, 403601",
-      "labelercode": "7843",
-      "multichainaddress": "12syYEdrRa1WQFhQJdnCSHrJt8a8jChiMfzRCs",
-      "keyspath": "./keystore/distkeystore/credentials.pem",
-      "ip": "169.254.216.151",
-      "port": "7999",
-      "user": "multichainrpc",
-      "pass": "Aj2FmLFTMASMorTo3QHQnsZHkojXS2qb4iGps3tzhUdx"
+    // Datepicker options
+    $scope.onezoneDatepicker = {
+      date: new Date(), // MANDATORY
+      mondayFirst: false,
+      disablePastDays: true,
+      disableSwipe: false,
+      disableWeekend: false,
+      showDatepicker: false,
+      showTodayButton: true,
+      calendarMode: false,
+      hideCancelButton: false,
+      hideSetButton: true,
+      callback: function (value) {
+        $scope.expirationDate = value;
+      }
+    };
 
-    }];
-
-    allTrades = [];
 
     if (localStorage.getItem('trades') !== null) {
       allTrades = JSON.parse(localStorage.getItem('trades'));
     }
-    console.log(localStorage.getItem('trades') !== null)
-    console.log("All Trades",allTrades)
 
-    var value;
+    console.log(localStorage.getItem('trades') !== null)
+    console.log("All Trades", allTrades)
+
     $scope.$on("$ionicView.beforeEnter", function () {
+      var value;
 
       $scope.ndc = Math.round((Math.random() * 100000) * 100000);
       $scope.lot = Math.round((Math.random() * 10000) * 10000);
+
       $('#productid').change(function () {
         selected = $('option:selected', this).attr('value');
         for (var i = 0; i < $scope.products.length; i++) {
@@ -124,12 +88,11 @@ myApp.controller('manufacturerCtrl', ['$scope', '$http', '$state','ionicToast',
       post_data.quantity = data.quantity;
       post_data.productInfo = $scope.productInfo;
       post_data.receiverInfo = 2;
-      console.log(post_data);
+      console.log("Manufacturer Post Data", post_data);
 
       $http.post(backendUrl + "/drugtrade", post_data)
         .success(function (response) {
-          console.log(response);
-          // ionicToast.show('Manufacturer Send Successful!!', 'bottom', false, 5000);
+          console.log("Manufacturer Post response",response);
           swal({
             title: "Data sent successfully!",
             button: false,

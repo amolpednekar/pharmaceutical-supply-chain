@@ -11,20 +11,16 @@ angular.module('app.controllers', [])
         $scope.reversedTrades = [];
       }
 
-      $scope.pharmacies = [{
-        "name": "Farmacia Salcette",
-        "address": "Gaunkar House Dada, Vaidya Chowk Ponda, Ponda–Durbhat, Ponda, Goa 403401",
-        "labelercode": "5876",
-        "multichainaddress": "16CzWSBPHV3gpdpRUEdX7uCUEPw9zaeK2616ve",
-        "keyspath": "./keystore/pharmkeystore/credentials.pem",
-        "ip": "169.254.216.151",
-        "port": "6999",
-        "user": "multichainrpc",
-        "pass": "HjafPtYCbspLSGd7KJ8XPqZ3G74niDiDkpyX7r9E1zLJ"
-      }];
+      // Get static json data for the form
 
-      var value;
+      $http.get('participants.json').success(function (response) {
+        $scope.pharmacies = [response[3]];
+      })
+
       $scope.$on("$ionicView.beforeEnter", function () {
+
+        var value;
+
         $('#pharmacyId').change(function () {
           selected = $('option:selected', this).attr('value');
           console.log($scope.pharmacies.length);
@@ -52,9 +48,7 @@ angular.module('app.controllers', [])
           .success(function (response) {
             console.log(response);
             $scope.tradeDetails = response.data.tradedetails;
-            console.log(response.data.verificationstatus)
             $scope.verificationStatus = response.data.verificationstatus;
-            console.log($scope.verificationStatus)
             $scope.drugTrade = response.data.tradedetails.drugtrade;
             $scope.tradeFlow = response.data.tradedetails.tradeflow;
 
@@ -96,8 +90,6 @@ angular.module('app.controllers', [])
             $scope.recallFlag = 0;
             //ionicToast.show('recalled_drugs_trades stream data not found! ', 'bottom', false, 5000);
           });
-
-
 
       }
 
