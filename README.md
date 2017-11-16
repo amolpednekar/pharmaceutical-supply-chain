@@ -70,3 +70,8 @@ To start frontend server, in 'Frontend' folder, run
 ```bash
 $ ionic serve
 ```
+
+## Contributors
+
+- [Amol Pednekar](https://github.com/amolpednekar)
+- [Shubham Verekar](https://github.com/shubhamvrkr)
