@@ -17,7 +17,18 @@ $ sudo apt-get install -y nodejs
 $ npm install -g ionic
 ```
 
-Start the network
+3. Install Multichain
+```bash
+$ wget https://www.multichain.com/download/multichain-1.0.1.tar.gz
+$ tar -xvzf multichain-1.0.1.tar.gz
+$ cd multichain-1.0.1
+$ mv multichaind multichain-cli multichain-util /usr/local/bin
+```
+
+4. Run 4 separate nodes
+
+Create 4 folders named FDANode, PharmNode, DistNode, ManfNode
+Then, 
 ```bash
 
 cd /
@@ -28,6 +39,11 @@ multichaind blockchain -datadir=/root/MultiChainDir/DistNode/ -port=8000 -rpcpor
 multichaind blockchain -datadir=/root/MultiChainDir/ManfNode/ -port=9000 -rpcport=8999 -daemon
 
 ```
+
+
+Create 4 streams: pubkeys, data, access, recall
+Using each account, post respective public key to the pubkeys stream.
+
 
 In the folder 'SupplyChainServer' run: 
 
@@ -54,3 +70,8 @@ To start frontend server, in 'Frontend' folder, run
 ```bash
 $ ionic serve
 ```
+
+## Contributors
+
+- [Amol Pednekar](https://github.com/amolpednekar)
+- [Shubham Verekar](https://github.com/shubhamvrkr)
